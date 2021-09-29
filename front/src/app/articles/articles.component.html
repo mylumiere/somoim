@@ -7,11 +7,4 @@
     {{article.content}}
   </li>
 </ul>
-<div *ngIf="selectedArticle">
-  <h2>{{selectedArticle.title}} Details</h2>
-  <div><span>id: </span>{{selectedArticle.id}}</div>
-  <div>
-    <label for="article-title">Article title: </label>
-    <input id="article-title" [(ngModel)]="selectedArticle.title" placeholder="title">
-  </div>
-</div>
+<app-article-detail [article]="selectedArticle"></app-article-detail>
