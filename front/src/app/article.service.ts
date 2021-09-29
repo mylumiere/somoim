@@ -29,6 +29,10 @@ export class ArticleService {
     };
   }
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   getArticles(): Observable<Article[]> {
     return this.http.get<Article[]>(this.articlesUrl)
     .pipe(
@@ -42,6 +46,20 @@ export class ArticleService {
     return this.http.get<Article>(url).pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
       catchError(this.handleError<Article>(`getArticle id=${id}`))
+    );
+  }
+
+  updateArticle(article: Article): Observable<any> {
+    return this.http.put(this.articlesUrl, article, this.httpOptions).pipe(
+      tap(_ => this.log(`updated article id=${article.id}`)),
+      catchError(this.handleError<any>(`updatedHero`))
+    )
+  }
+
+  addArticle(article: Article): Observable<Article> {
+    return this.http.post<Article>(this.articlesUrl, article, this.httpOptions).pipe(
+      tap((newArticle: Article) => this.log(`added article w/ id=${newArticle.id}`)),
+      catchError(this.handleError<Article>('addArticle'))
     );
   }
 }

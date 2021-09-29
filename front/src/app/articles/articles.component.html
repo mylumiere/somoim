@@ -6,3 +6,15 @@
     </a>
   </li>
 </ul>
+<div>
+  <label for="new-title">Article title: </label>
+  <input id="new-title" #articleTitle />
+  <label for="new-content">Article content: </label>
+  <input id="new-content" #articleContent />
+  
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button class="add-button" (click)="add(articleTitle.value, articleContent.value); articleTitle.value=''; articleContent.value=''">
+    Add Article
+  </button>
+</div>
