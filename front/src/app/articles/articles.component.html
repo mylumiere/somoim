@@ -3,7 +3,7 @@
   <li *ngFor="let article of articles"
   [class.selected]="article === selectedArticle"
   (click)="onSelect(article)">
-    <span class="badge">{{article.id}}</span> {{article.title}}<br>
+    <span class="badge">{{article.id}}</span> {{article.title}}
     {{article.content}}
   </li>
 </ul>
