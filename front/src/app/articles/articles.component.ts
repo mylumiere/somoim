@@ -12,7 +12,6 @@ import { MessageService } from '../message.service';
 export class ArticlesComponent implements OnInit {
 
   articles: Article[] = [];
-  selectedArticle?: Article;
 
   constructor(
     private articleService: ArticleService,
@@ -21,11 +20,6 @@ export class ArticlesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getArticles()
-  }
-
-  onSelect(article: Article): void {
-    this.selectedArticle = article;
-    this.messageService.add('MessageComponent: Selected article id='+article.id);
   }
 
   getArticles(): void {
