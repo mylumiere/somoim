@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../models/article';
+import { ArticleService } from '../article.service';
+import { MessageService } from '../message.service';
 
-import { ARTICLES } from '../mock-articles';
 
 @Component({
   selector: 'app-articles',
@@ -10,16 +11,26 @@ import { ARTICLES } from '../mock-articles';
 })
 export class ArticlesComponent implements OnInit {
 
-  articles = ARTICLES;
+  articles: Article[] = [];
   selectedArticle?: Article;
 
-  constructor() { }
+  constructor(
+    private articleService: ArticleService,
+    private messageService: MessageService,
+    ) { }
 
   ngOnInit(): void {
+    this.getArticles()
   }
 
   onSelect(article: Article): void {
     this.selectedArticle = article;
+    this.messageService.add('MessageComponent: Selected article id='+article.id);
+  }
+
+  getArticles(): void {
+    this.articleService.getArticles()
+        .subscribe(articles => this.articles = articles);
   }
 
 }
