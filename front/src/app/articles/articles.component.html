@@ -1,0 +1,6 @@
+<h2>{{article.title | uppercase}} Details</h2>
+<div><span>id: </span>{{article.id}}</div>
+<div><span>title: </span>
+  <input id="title" [(ngModel)]="article.title" placeholder="title">
+</div>
+<div><span>content: </span>{{article.content}}</div>

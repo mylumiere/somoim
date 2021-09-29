@@ -7,6 +7,9 @@ from django.views.generic import View, CreateView
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 
+def index(request):
+    return render(request, 'users/index.html')
+
 @method_decorator(logout_message_required, name='dispatch')
 class AgreementView(View):
     def get(self, request, *args, **kwargs):
