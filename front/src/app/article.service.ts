@@ -18,4 +18,10 @@ export class ArticleService {
     this.messageService.add('ArticleService: fetched articles');
     return articles;
   }
+
+  getArticle(id: number): Observable<Article> {
+    const article = ARTICLES.find(art => art.id === id)!;
+    this.messageService.add(`ArticleService: fetched article id=${id}`);
+    return of(article);
+  }
 }
