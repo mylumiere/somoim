@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../models/article';
 
+import { ARTICLES } from '../mock-articles';
+
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
@@ -8,15 +10,16 @@ import { Article } from '../models/article';
 })
 export class ArticlesComponent implements OnInit {
 
-  article: Article = {
-    id: 1,
-    title: 'Hello',
-    content: 'This is article'
-  };
+  articles = ARTICLES;
+  selectedArticle?: Article;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSelect(article: Article): void {
+    this.selectedArticle = article;
   }
 
 }
