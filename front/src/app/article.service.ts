@@ -62,4 +62,12 @@ export class ArticleService {
       catchError(this.handleError<Article>('addArticle'))
     );
   }
+
+  deleteArticle(id: number): Observable<Article> {
+    const url = `${this.articlesUrl}/${id}`;
+    return this.http.delete<Article>(url,this.httpOptions).pipe(
+      tap(_ => this.log(`deleted article id=${id}`)),
+      catchError(this.handleError<Article>('deleteArticle'))
+    );
+  }
 }
