@@ -27,4 +27,18 @@ export class ArticlesComponent implements OnInit {
         .subscribe(articles => this.articles = articles);
   }
 
+  add(title: string, content: string): void {
+    title = title.trim();
+    content = content.trim();
+    if (!title || !content) { return; }
+    this.articleService.addArticle({ title, content } as Article)
+    .subscribe(article => {
+      this.articles.push(article);
+    });
+  }
+
+  delete(article: Article): void {
+    this.articles = this.articles.filter(a => a !== article);
+    this.articleService.deleteArticle(article.id).subscribe();
+  }
 }
