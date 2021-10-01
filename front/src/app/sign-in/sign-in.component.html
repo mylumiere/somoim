@@ -5,31 +5,38 @@
     </div>
     <div class="main-row">
       <mat-grid-list cols="3" rowHeight="60px">
-        <mat-grid-tile [colspan]="2">
-          <mat-form-field>
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Username"/>
-          </mat-form-field>
+        <mat-grid-tile [colspan]="2" [rowspan]="2">
+          <div>
+            <mat-form-field>
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Username"/>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Password"/>
+            </mat-form-field>
+          </div>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="2">
-          <button mat-raised-button class="login-button">로그인</button>
+          <div>
+            <button mat-raised-button color="primary" class="sign-in-button">로그인</button>
+          </div>
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="2">
-          <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Password"/>
-          </mat-form-field>
+        <mat-grid-tile [colspan]="3">
+          <div>
+            <button mat-raised-button color="accent" class="sign-up-button">가입하고 소모임 찾기 ></button>
+          </div>
         </mat-grid-tile>
       </mat-grid-list>
     </div>
     <div class="main-row">
-      <button mat-fab color="basic" class="sns_button kakao-button"></button>
+      <button mat-fab color="basic" class="sns-button kakao-button"></button>
       <span class="spacer"></span>
-      <button mat-fab color="basic" class="sns_button naver-button"></button>
+      <button mat-fab color="basic" class="sns-button naver-button"></button>
       <span class="spacer"></span>
-      <button mat-fab color="basic" class="sns_button google-button"></button>
+      <button mat-fab color="basic" class="sns-button google-button"></button>
       <span class="spacer"></span>
-      <button mat-fab color="basic" class="sns_button facebook-button"></button>
+      <button mat-fab color="basic" class="sns-button facebook-button"></button>
     </div>
     <div class="main-row">
       <h3>
