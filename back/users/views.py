@@ -7,6 +7,10 @@ from django.views.generic import View, CreateView
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import UserSerializer
+
 def index(request):
     return render(request, 'users/index.html')
 
@@ -43,5 +47,12 @@ class RegisterView(CreateView):
     def form_valid(self, form):
         self.object = form.save()
         return redirect(self.get_success_url())
+
+class UserListAPI(APIView):
+    def get(self, request):
+        queryset = User.objects.all()
+        print(queryset)
+        serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 # Create your views here.

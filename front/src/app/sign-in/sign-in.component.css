@@ -5,16 +5,26 @@
   width: 400px;
 }
 
-.login-button{
+.sign-in-button{
   height: 80px;
-  width: 80px;
+  width: 120px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.sign-up-button {
+  height: 40px;
+  width: 300px;
+  font-weight: bold;
+  border-radius: 10px;
 }
 
 .spacer {
   margin: 10px
 }
 
-.sns_button {
+.sns-button {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
