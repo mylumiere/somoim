@@ -5,8 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 // For materia
 import { MatButtonModule } from '@angular/material/button';
-import { MatGridListModule } from '@angular/material/grid-list'
+import { MatCardModule} from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSliderModule } from '@angular/material/slider';
 
@@ -22,6 +26,8 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { MessagesComponent } from './messages/messages.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './main/main.component';
+import { InfoComponent } from './info/info.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -29,15 +35,22 @@ import { MainComponent } from './main/main.component';
     ArticlesComponent,
     ArticleDetailComponent,
     MessagesComponent,
-    MainComponent
+    MainComponent,
+    InfoComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    // ---------- MaterialModule ------------
     MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
+    MatInputModule,
     MatToolbarModule,
     MatSliderModule,
     HttpClientInMemoryWebApiModule.forRoot(

@@ -1,0 +1,40 @@
+<div class="main-div">
+  <mat-card>
+    <div class="main-row">
+      <img class="logo" src="../../assets/logo_transparent.png"/>
+    </div>
+    <div class="main-row">
+      <mat-grid-list cols="3" rowHeight="60px">
+        <mat-grid-tile [colspan]="2">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username"/>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="2">
+          <button mat-raised-button class="login-button">로그인</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2">
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password"/>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div class="main-row">
+      <button mat-fab color="basic" class="sns_button kakao-button"></button>
+      <span class="spacer"></span>
+      <button mat-fab color="basic" class="sns_button naver-button"></button>
+      <span class="spacer"></span>
+      <button mat-fab color="basic" class="sns_button google-button"></button>
+      <span class="spacer"></span>
+      <button mat-fab color="basic" class="sns_button facebook-button"></button>
+    </div>
+    <div class="main-row">
+      <h3>
+        Github Link: <a href="https://github.com/mylumiere/somoim">https://github.com/mylumiere/somoim</a>
+      </h3>
+    </div>
+  </mat-card>
+</div>
