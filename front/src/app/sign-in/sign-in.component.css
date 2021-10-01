@@ -1,0 +1,42 @@
+@import '../app.component.css';
+
+.logo {
+  height: 400px;
+  width: 400px;
+}
+
+.login-button{
+  height: 80px;
+  width: 80px;
+}
+
+.spacer {
+  margin: 10px
+}
+
+.sns_button {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.kakao-button {
+  background-image: url('../../assets/kakaotalk_logo_icon_147272.svg');
+}
+
+.naver-button {
+  background-image: url('../../assets/btnG_아이콘원형.png');
+}
+
+.google-button {
+  background-image: url('../../assets/pngkit_mpaa-logo-png_1783296.png');
+}
+
+.facebook-button {
+  background-image: url('../../assets/facebook-round-icon-png-22.jpg');
+}
+
+h3 {
+  color: grey;
+  font-size: 12px;
+}

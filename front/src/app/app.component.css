@@ -6,3 +6,16 @@
 .navs {
   margin: 5px
 }
+
+.main-row {
+  width:100%;
+  padding: 5px;
+  text-align: center;
+}
+
+.main-div{
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
