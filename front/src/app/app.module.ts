@@ -28,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './main/main.component';
 import { InfoComponent } from './info/info.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
     MessagesComponent,
     MainComponent,
     InfoComponent,
-    SignInComponent
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
