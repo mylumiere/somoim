@@ -6,9 +6,10 @@
     <mat-divider></mat-divider>
     <div>
       <div class="main-row">
-        <mat-form-field>
-          <mat-label>Username</mat-label>
-          <input matInput placeholder="Username"/>
+        <mat-form-field apperance="fill">
+          <mat-label>User_ID</mat-label>
+          <input matInput placeholder="User_ID" [formControl]="user_id" required>
+          <mat-error *ngIf="user_id.invalid">{{getUserIdErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>
       <div class="main-row">
@@ -29,6 +30,18 @@
           <input matInput placeholder="Email"/>
         </mat-form-field>
       </div>
+      <div class="main-row">
+        <mat-form-field>
+          <mat-label>Nickname</mat-label>
+          <input matInput placeholder="Nickname"/>
+        </mat-form-field>
+      </div>
+      <div class="main-row">
+        <mat-form-field>
+          <mat-label>Date_of_Birth</mat-label>
+          <input matInput placeholder="Date_of_Birth"/>
+        </mat-form-field>
+      </div>
       <!--div class="main-row">
         <h2>이용약관</h2>
         <mat-card style="width: 800px;">
@@ -36,8 +49,19 @@
         </mat-card>
       </div-->
       <div class="main-row">
-        <button mat-raised-button color="accent">완료</button>
+        <button mat-raised-button color="accent" (click)='signUp(
+          user_id.value,password.value,email.value,name.value,nickname.value,date_of_birth.value
+          )'>완료</button>
       </div>
     </div>
   </mat-card>
 </div>
+{{status}}
+<ul>
+  <li *ngFor="let user of users">
+    <a>
+      <span class="badge">{{user.user_id}}</span> {{user.user_id}}{{user.email}}
+    </a>
+    <button class="delete" title="delete article">x</button>
+  </li>
+</ul>

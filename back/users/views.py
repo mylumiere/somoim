@@ -1,52 +1,31 @@
+import json
+
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
+from django.views import View
+from django.http import JsonResponse
+from django.contrib import auth
+from django.contrib.auth import login, authenticate
 from .decorators import *
 from .models import User
-from .forms import RegisterForm
-from django.views.generic import View, CreateView
-from django.contrib import messages
-from django.core.exceptions import PermissionDenied
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer
 
-def index(request):
-    return render(request, 'users/index.html')
-
-@method_decorator(logout_message_required, name='dispatch')
-class AgreementView(View):
-    def get(self, request, *args, **kwargs):
-        request.session['agreement'] = False
-        print(1)
-        return render(request, 'users/agreement.html')
-
-    def post(self, request, *args, **kwarg):
-        if request.POST.get('agreement1', False) and request.POST.get('agreement2', False):
-            request.session['agreement'] = True
-            return redirect('/users/register/')
-        else:
-            messages.info(request, "약관에 모두 동의해주세요.")
-            return render(request, 'users/agreement.html')
-
-class RegisterView(CreateView):
-    model = User
-    template_name = 'users/register.html'
-    form_class = RegisterForm
-
-    def get(self, request, *args, **kwargs):
-        if not request.session.get('agreement', False):
-            raise PermissionDenied
-        request.session['agreement'] = False
-        return super().get(request, *args, **kwargs)
-
-    def get_success_url(self):
-        messages.success(self.request, "회원가입 성공.")
-        return redirect('users:login')
-
-    def form_valid(self, form):
-        self.object = form.save()
-        return redirect(self.get_success_url())
+class SignUpView(View):
+    def post(self, request):
+        data = json.loads(request.body)
+        User(
+            user_id = data['user_id'],
+            password = data['password'],
+            email = data['email'],
+            name = data['name'],
+            nickname = data['nickname'],
+            date_of_birth = data['date_of_birth'],
+            about = data['about']
+        )
+        return HttpResponse(status=200)
 
 class UserListAPI(APIView):
     def get(self, request):
@@ -54,5 +33,20 @@ class UserListAPI(APIView):
         print(queryset)
         serializer = UserSerializer(queryset, many=True)
         return Response(serializer.data)
+    
+    def post(self, request):
+        data = request.data
+        #user = User.objects.filter(email=data['email']).first()
+        user = User(
+            user_id = data['user_id'],
+            password = data['password'],
+            #email = data['email'],
+            #name = data['name'],
+            #nickname = data['nickname'],
+            #date_of_birth = data['date_of_birth'],
+            #about = data['about']
+        )
+        user.save()
+        return HttpResponse(status=200)
 
 # Create your views here.

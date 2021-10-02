@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 // For material
 import { MatButtonModule } from '@angular/material/button';
@@ -39,7 +39,12 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'csrftoken',
+      headerName: 'X-CSRFToken'
+    }),
     // ---------- MaterialModule ------------
     MatButtonModule,
     MatCardModule,
@@ -50,9 +55,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MatInputModule,
     MatToolbarModule,
     MatSliderModule,
- //   HttpClientInMemoryWebApiModule.forRoot(
- //     InMemoryDataService, { dataEncapsulation: false }
- //   ),
+
     AppRoutingModule,
     BrowserAnimationsModule
   ],
