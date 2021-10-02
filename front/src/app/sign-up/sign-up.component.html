@@ -1,62 +1,76 @@
 <div class="main-div">
-  <mat-card>
+  <mat-card style="height: 80%; overflow-y: auto">
     <mat-card-title>
       <h1>회원가입</h1>
     </mat-card-title>
     <mat-divider></mat-divider>
-    <div>
-      <div class="main-row">
-        <mat-form-field apperance="fill">
-          <mat-label>User_ID</mat-label>
-          <input matInput placeholder="User_ID" [formControl]="user_id" required>
-          <mat-error *ngIf="user_id.invalid">{{getUserIdErrorMessage()}}</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="main-row">
-        <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input matInput placeholder="Password"/>
-        </mat-form-field>
-      </div>
-      <div class="main-row">
-        <mat-form-field>
-          <mat-label>Password Confirm</mat-label>
-          <input matInput placeholder="Password Confirm"/>
-        </mat-form-field>
-      </div>
-      <div class="main-row">
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Email"/>
-        </mat-form-field>
-      </div>
-      <div class="main-row">
-        <mat-form-field>
-          <mat-label>Nickname</mat-label>
-          <input matInput placeholder="Nickname"/>
-        </mat-form-field>
-      </div>
-      <div class="main-row">
-        <mat-form-field>
-          <mat-label>Date_of_Birth</mat-label>
-          <input matInput placeholder="Date_of_Birth"/>
-        </mat-form-field>
-      </div>
-      <!--div class="main-row">
-        <h2>이용약관</h2>
-        <mat-card style="width: 800px;">
-          texttexttexttextt
-        </mat-card>
-      </div-->
-      <div class="main-row">
-        <button mat-raised-button color="accent" (click)='signUp(
-          user_id.value,password.value,email.value,name.value,nickname.value,date_of_birth.value
-          )'>완료</button>
-      </div>
+    <div class="main-row">
+      <img src="../../assets/logo_transparent.png" class="logo">
     </div>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+      <div>
+        <div class="main-row">
+          <mat-form-field style="width: 320px;" appearance="outline">
+            <mat-label>아이디</mat-label>
+            <input matInput placeholder="아이디" formControlName="user_id" required>
+            <mat-error *ngIf="user_id?.invalid">{{getUserIdErrorMessage()}}</mat-error>
+            <mat-hint>영문, 숫자로만 이루어진 3-15자 아이디만 가능합니다.</mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+          <div class="main-row">
+            <mat-form-field style="width: 320px;" appearance="outline">
+              <mat-label>비밀번호</mat-label>
+              <input matInput placeholder="비밀번호" type="password" formControlName="password" required>
+              <mat-error *ngIf="password?.invalid">{{getPasswordErrorMessage()}}</mat-error>
+              <mat-hint>영문, 숫자, 특수문자 모두로 이루어진 8-15자 비밀번호만 가능합니다.</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="main-row">
+            <mat-form-field style="width: 320px;" appearance="outline">
+              <mat-label>비밀번호 확인</mat-label>
+              <input matInput placeholder="비밀번호 확인" type="password" formControlName="password_confirm" required>
+              <mat-error *ngIf="signUpForm.errors && signUpForm.errors.unmatch">{{getPasswordConfirmErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="main-row">
+            <mat-form-field style="width: 320px;" appearance="outline">
+              <mat-label>이메일</mat-label>
+              <input matInput placeholder="이메일" formControlName="email" required>
+              <mat-error *ngIf="email?.invalid">{{getEmailErrorMessage()}}</mat-error>
+              <mat-hint>정확한 형식으로 적어주세요. 예) example@somoim.com</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="main-row">
+            <mat-form-field style="width: 320px;" appearance="outline">
+              <mat-label>이름</mat-label>
+              <input matInput placeholder="이름" formControlName="name" required>
+              <mat-error *ngIf="name?.invalid">{{getNameErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="main-row">
+            <mat-form-field style="width: 320px;" appearance="outline">
+              <mat-label>생년월일</mat-label>
+              <input matInput [matDatepicker]="datepicker" placeholder="생년월일" formControlName="date_of_birth">
+              <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+              <mat-datepicker #datepicker>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>취소</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>확인</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+              <mat-hint>오른쪽의 달력을 눌러주세요.</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="main-row">
+            <button mat-raised-button color="accent" type="submit"
+            [disabled]="!signUpForm.valid">완료</button>
+          </div>
+        </div>
+      </div>
+    </form>
   </mat-card>
 </div>
-{{status}}
 <ul>
   <li *ngFor="let user of users">
     <a>

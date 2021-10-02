@@ -4,8 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 // For material
+import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MY_FORMATS } from './date_formats';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule} from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -34,7 +39,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MainComponent,
     InfoComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,8 +51,11 @@ import { SignUpComponent } from './sign-up/sign-up.component';
       headerName: 'X-CSRFToken'
     }),
     // ---------- MaterialModule ------------
+    MatNativeDateModule,
+
     MatButtonModule,
     MatCardModule,
+    MatDatepickerModule,
     MatDividerModule,
     MatFormFieldModule,
     MatGridListModule,
@@ -59,7 +67,12 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    MatNativeDateModule,
+    MatDatepickerModule,
+    {provide:MAT_DATE_LOCALE, useValue:'ko-KR'},
+    {provide:MAT_DATE_FORMATS, useValue:MY_FORMATS}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
