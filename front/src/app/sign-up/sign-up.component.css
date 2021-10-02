@@ -1,2 +1,6 @@
 @import '../app.component.css';
 
+.logo {
+  height: 200px;
+  width: 200px;
+}
