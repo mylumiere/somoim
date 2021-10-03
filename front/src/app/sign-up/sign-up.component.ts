@@ -131,21 +131,6 @@ signUpForm: FormGroup;
     else return '';
   }
 
-  /*
-  signUp(user_id: string, password: string, email: string,
-    name: string, nickname: string, date_of_birth: string) {
-    this.getUsers()
-    this.userService.postUser({
-      user_id, password, email, name, nickname, date_of_birth
-    } as User)
-    .subscribe(user => {
-      if(user) {
-        this.router.navigate(['/'])
-      }
-    })
-  }
-*/
-
 onSubmit() {
   this.getUsers()
   this.userService.postUser(this.signUpForm.value)
