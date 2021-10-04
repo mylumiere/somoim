@@ -1,7 +1,10 @@
-import { NONE_TYPE } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { MatDialog } from '@angular/material/dialog';
+import { DuplicatedDialogComponent } from './duplicated-dialog/duplicated-dialog.component';
+import { UniqueDialogComponent } from './unique-dialog/unique-dialog.component';
 
 import { User } from '../models/user';
 
@@ -18,13 +21,16 @@ export class SignUpComponent implements OnInit {
 signUpForm: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
+    private dialog: MatDialog,
   ) { }
+
+  maxDate: Date;
 
   ngOnInit(): void {
     this.getUsers()
+    
     this.signUpForm = new FormGroup({
       user_id: new FormControl('', [
         Validators.required,
@@ -41,7 +47,12 @@ signUpForm: FormGroup;
     }, {
       validators: [PasswordConfirmValidator]
     })
+  
+    const currentYear = new Date().getFullYear();
+    this.maxDate = new Date(currentYear - 12, 11, 31);
   }
+
+
 
   users: User[] = [];
   dup_user: User;
@@ -135,8 +146,18 @@ signUpForm: FormGroup;
     else return '';
   }
 
+  errors: ValidationErrors
   setDuplicateCheck() {
-    this.user_id?.setErrors({duplicateCheck: true});
+    console.log(this.user_id?.errors)
+    this.errors = this.user_id?.errors
+    if (this.errors) {
+      this.errors['duplicateCheck'] = true
+    }
+    else {
+      this.errors = {duplicateCheck:true}
+    }
+    this.user_id?.setErrors(this.errors);
+    console.log(this.user_id?.errors)
     return;
   }
 
@@ -144,9 +165,10 @@ signUpForm: FormGroup;
     this.dup_user = this.users.find(u => u.user_id == this.user_id?.value)
     console.log(this.dup_user)
     if (this.dup_user) {
-      console.log('check');
+      this.openDuplicateDialog()
     }
     else {
+      this.openUniqueDialog()
       this.user_id?.setErrors({duplicateCheck: false});
       this.user_id?.updateValueAndValidity();
     }
@@ -162,38 +184,17 @@ signUpForm: FormGroup;
       }
     })
   }
-/*
-  checkUserIdDuplicate() {
-    dup_user = this.users.filter(u => u.name == this.name?.value)
-    if (dup_user) {
-      this.name?.setErrors({dubplicateCheck: false})
-    }
-  }*/
+
+  openDuplicateDialog() {
+    this.dialog.open(DuplicatedDialogComponent);
+  }
+  
+  openUniqueDialog() {
+    this.dialog.open(UniqueDialogComponent);
+  }
 
   getUsers() {
     this.userService.getUsers()
     .subscribe(users => this.users = users);
   }
-  
-/*
-  getArticles(): void {
-    this.articleService.getArticles()
-        .subscribe(articles => this.articles = articles);
-  }
-
-  add(title: string, content: string): void {
-    title = title.trim();
-    content = content.trim();
-    if (!title || !content) { return; }
-    this.articleService.addArticle({ title, content } as Article)
-    .subscribe(article => {
-      this.articles.push(article);
-    });
-  }
-
-  delete(article: Article): void {
-    this.articles = this.articles.filter(a => a !== article);
-    this.articleService.deleteArticle(article.id).subscribe();
-  }
-  */
 }
