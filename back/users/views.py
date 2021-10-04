@@ -17,19 +17,18 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer
 
-class SignUpView(View):
+class SignInView(View):
     def post(self, request):
         data = json.loads(request.body)
-        User(
-            user_id = data['user_id'],
-            password = data['password'],
-            email = data['email'],
-            name = data['name'],
-            nickname = data['nickname'],
-            date_of_birth = data['date_of_birth'],
-            about = data['about']
-        )
-        return HttpResponse(status=200)
+        user_id = data['user_id']
+        pw = data['password']
+        user = authenticate(username=user_id, password=pw)
+        print(user)
+        if user:
+            login(request,user)
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=401)
 
 class UserListAPI(APIView):
     def get(self, request):
@@ -40,25 +39,19 @@ class UserListAPI(APIView):
     
     def post(self, request):
         data = request.data
-        #user = User.objects.filter(email=data['email']).first()
         user_id = data['user_id']
         password = data['password']
-        #password = data['password'].encode('utf-8')
-        #password_crypt = bcrypt.hashpw(password, bcrypt.gensalt())
-        #password_crypt = password_crypt.decode('utf-8')
         date_of_birth = data['date_of_birth']
         date_of_birth = datetime.strptime(date_of_birth,'%Y-%m-%dT%H:%M:%S.%fZ')
         utc = date_of_birth.replace(tzinfo=pytz.UTC)
         date_of_birth = utc.astimezone(timezone.get_current_timezone()).date()
         user = User(
             user_id = user_id,
-            password = password,
             email = data['email'],
             name = data['name'],
-            #nickname = data['nickname'],
             date_of_birth = date_of_birth,
-            #about = data['about']
         )
+        user.set_password(password)
         user.save()
         serializer = UserSerializer(user)
         return Response(serializer.data,status=200)

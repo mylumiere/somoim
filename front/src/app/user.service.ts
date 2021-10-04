@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 import { User } from './models/user';
 import { MessageService } from './message.service';
@@ -13,6 +14,7 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
+    public router: Router,
     ) { }
   
   private log(message: string) {
@@ -49,14 +51,31 @@ export class UserService {
     );
   }
 
-  /*
-  getArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.articlesUrl)
-    .pipe(
-      tap(_ => this.log('fetched articles')),
-      catchError(this.handleError<Article[]>('getArticles',[]))
-      );
+  currentUser: User
+
+  signIn(obj) {
+    console.log(obj)
+    return this.http.post<User>(`${this.usersUrl}/sign_in/`, 
+    obj, this.httpOptions).pipe(
+      tap((res: any) => {
+        console.log(res)
+        //localStorage.setItem('access_token', res.token)
+        this.getUser(res.id).subscribe((res) => {
+          this.currentUser = res;
+          console.log(this.currentUser)
+        })
+      })
+    )
   }
+
+  getUser(id: number): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}/${id}/`).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<User>(`getUser id=${id}`))
+    )
+  }
+
+  /*
 
   getArticle(id: number): Observable<Article> {
     const url = `${this.articlesUrl}/${id}`;
