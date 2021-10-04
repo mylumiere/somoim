@@ -10,7 +10,8 @@ import { MY_FORMATS } from './date_formats';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule} from '@angular/material/card';
-import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -29,6 +30,8 @@ import { MainComponent } from './main/main.component';
 import { InfoComponent } from './info/info.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { DuplicatedDialogComponent } from './sign-up/duplicated-dialog/duplicated-dialog.component';
+import { UniqueDialogComponent } from './sign-up/unique-dialog/unique-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     InfoComponent,
     SignInComponent,
     SignUpComponent,
+    DuplicatedDialogComponent,
+    UniqueDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,
+    MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
     MatGridListModule,

@@ -49,7 +49,7 @@ class UserListAPI(APIView):
         date_of_birth = data['date_of_birth']
         date_of_birth = datetime.strptime(date_of_birth,'%Y-%m-%dT%H:%M:%S.%fZ')
         utc = date_of_birth.replace(tzinfo=pytz.UTC)
-        date_of_birth = utc.astimezone(timezone.get_current_timezone())
+        date_of_birth = utc.astimezone(timezone.get_current_timezone()).date()
         user = User(
             user_id = user_id,
             password = password,
@@ -60,6 +60,7 @@ class UserListAPI(APIView):
             #about = data['about']
         )
         user.save()
-        return HttpResponse(status=200)
+        serializer = UserSerializer(user)
+        return Response(serializer.data,status=200)
 
 # Create your views here.

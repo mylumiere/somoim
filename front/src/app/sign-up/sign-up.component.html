@@ -14,7 +14,7 @@
             <mat-label>아이디</mat-label>
             <input matInput placeholder="아이디" formControlName="user_id" required (change)="setDuplicateCheck()">
               <button mat-raised-button matSuffix color="accent" style="top: -7px;"
-              type="button" (click)="duplicateCheck()">중복확인</button>
+              type="button" [disabled]="user_id?.hasError('required') || user_id?.hasError('pattern')" (click)="duplicateCheck()">중복확인</button>
             <mat-error *ngIf="user_id?.invalid || user_id?.errors">{{getUserIdErrorMessage()}}</mat-error>
             <mat-hint>영문, 숫자로만 이루어진 3-15자 아이디만 가능합니다.</mat-hint>
           </mat-form-field>
@@ -53,15 +53,16 @@
           <div class="main-row">
             <mat-form-field style="width: 320px;" appearance="outline">
               <mat-label>생년월일</mat-label>
-              <input matInput [matDatepicker]="datepicker" placeholder="생년월일" formControlName="date_of_birth">
+              <input matInput [matDatepicker]="datepicker" [max]="maxDate"
+              placeholder="생년월일" formControlName="date_of_birth">
               <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-              <mat-datepicker #datepicker>
+              <mat-datepicker #datepicker startView="multi-year">
                 <mat-datepicker-actions>
                   <button mat-button matDatepickerCancel>취소</button>
                   <button mat-raised-button color="primary" matDatepickerApply>확인</button>
                 </mat-datepicker-actions>
               </mat-datepicker>
-              <mat-hint>오른쪽의 달력을 눌러주세요.</mat-hint>
+              <mat-hint>오른쪽의 달력을 눌러주세요. (~2009년)</mat-hint>
             </mat-form-field>
           </div>
           <div class="main-row">
