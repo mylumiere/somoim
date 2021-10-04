@@ -5,23 +5,25 @@
     </div>
     <div class="main-row">
       <mat-grid-list cols="3" rowHeight="60px">
-        <mat-grid-tile [colspan]="2" [rowspan]="2">
-          <div>
-            <mat-form-field>
-              <mat-label>Username</mat-label>
-              <input matInput placeholder="Username"/>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Password</mat-label>
-              <input matInput placeholder="Password"/>
-            </mat-form-field>
-          </div>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="2">
-          <div>
-            <button mat-raised-button color="primary" class="sign-in-button">로그인</button>
-          </div>
-        </mat-grid-tile>
+        <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+          <mat-grid-tile [colspan]="2" [rowspan]="2">
+            <div>
+              <mat-form-field>
+                <mat-label>아이디</mat-label>
+                <input matInput formControlName="user_id" placeholder="아이디"/>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>비밀번호</mat-label>
+                <input matInput type="password" formControlName="password" placeholder="비밀번호"/>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="2">
+            <div>
+              <button mat-raised-button color="primary" class="sign-in-button">로그인</button>
+            </div>
+          </mat-grid-tile>
+        </form>
         <mat-grid-tile [colspan]="3">
           <div>
             <button mat-raised-button color="accent" class="sign-up-button" routerLink="/sign_up">가입하고 소모임 찾기 ></button>

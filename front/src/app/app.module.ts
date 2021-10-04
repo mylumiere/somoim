@@ -32,6 +32,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { DuplicatedDialogComponent } from './sign-up/duplicated-dialog/duplicated-dialog.component';
 import { UniqueDialogComponent } from './sign-up/unique-dialog/unique-dialog.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { UniqueDialogComponent } from './sign-up/unique-dialog/unique-dialog.com
     SignUpComponent,
     DuplicatedDialogComponent,
     UniqueDialogComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -30,7 +30,7 @@ signUpForm: FormGroup;
 
   ngOnInit(): void {
     this.getUsers()
-    
+
     this.signUpForm = new FormGroup({
       user_id: new FormControl('', [
         Validators.required,
@@ -148,7 +148,6 @@ signUpForm: FormGroup;
 
   errors: ValidationErrors
   setDuplicateCheck() {
-    console.log(this.user_id?.errors)
     this.errors = this.user_id?.errors
     if (this.errors) {
       this.errors['duplicateCheck'] = true
@@ -157,7 +156,6 @@ signUpForm: FormGroup;
       this.errors = {duplicateCheck:true}
     }
     this.user_id?.setErrors(this.errors);
-    console.log(this.user_id?.errors)
     return;
   }
 
@@ -176,10 +174,10 @@ signUpForm: FormGroup;
   }
 
   onSubmit() {
-    this.getUsers()
     this.userService.postUser(this.signUpForm.value)
     .subscribe(user => {
       if(user) {
+        console.log(user)
         this.router.navigate(['/'])
       }
     })
