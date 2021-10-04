@@ -43,7 +43,8 @@ signUpForm: FormGroup;
     })
   }
 
-  users: User[] = []
+  users: User[] = [];
+  dup_user: User;
 
 
   // Getter Classes
@@ -79,6 +80,9 @@ signUpForm: FormGroup;
     }
     else if (this.user_id?.hasError('pattern')) {
       return '영문, 숫자로만 이루어진 3-15자 아이디만 가능합니다.';
+    }
+    else if (this.user_id?.hasError('duplicateCheck')) {
+      return '중복확인을 진행해주세요'
     }
     else return '';
   }
@@ -131,15 +135,41 @@ signUpForm: FormGroup;
     else return '';
   }
 
-onSubmit() {
-  this.getUsers()
-  this.userService.postUser(this.signUpForm.value)
-  .subscribe(user => {
-    if(user) {
-      this.router.navigate(['/'])
+  setDuplicateCheck() {
+    this.user_id?.setErrors({duplicateCheck: true});
+    return;
+  }
+
+  duplicateCheck() {
+    this.dup_user = this.users.find(u => u.user_id == this.user_id?.value)
+    console.log(this.dup_user)
+    if (this.dup_user) {
+      console.log('check');
     }
-  })
-}
+    else {
+      this.user_id?.setErrors({duplicateCheck: false});
+      this.user_id?.updateValueAndValidity();
+    }
+    return
+  }
+
+  onSubmit() {
+    this.getUsers()
+    this.userService.postUser(this.signUpForm.value)
+    .subscribe(user => {
+      if(user) {
+        this.router.navigate(['/'])
+      }
+    })
+  }
+/*
+  checkUserIdDuplicate() {
+    dup_user = this.users.filter(u => u.name == this.name?.value)
+    if (dup_user) {
+      this.name?.setErrors({dubplicateCheck: false})
+    }
+  }*/
+
   getUsers() {
     this.userService.getUsers()
     .subscribe(users => this.users = users);
