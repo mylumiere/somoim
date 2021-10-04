@@ -160,3 +160,16 @@ LOGIN_URL = '/users/login/'          # 로그인 URL
 LOGIN_REDIRECT_URL = '/users/main/'  # 로그인 후 URL
 LOGOUT_REDIRECT_URL = '/'            # 로그아웃 후 URL
 AUTH_USER_MODEL = "users.User"       # 커스텀 인증 모델
+
+
+# SMTP
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+# gmail과의 통신하는 포트
+EMAIL_HOST_USER = get_secret('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = get_secret('EMAIL_HOST_PASSWORD')
+# 발신할 메일의 비밀번호
+EMAIL_USE_TLS = True
+# TLS 보안 방법
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# 사이트와 관련한 자동응답을 받을 이메일 주소,'webmaster@localhost'
