@@ -12,8 +12,10 @@
         <div class="main-row">
           <mat-form-field style="width: 320px;" appearance="outline">
             <mat-label>아이디</mat-label>
-            <input matInput placeholder="아이디" formControlName="user_id" required>
-            <mat-error *ngIf="user_id?.invalid">{{getUserIdErrorMessage()}}</mat-error>
+            <input matInput placeholder="아이디" formControlName="user_id" required (change)="setDuplicateCheck()">
+              <button mat-raised-button matSuffix color="accent" style="top: -7px;"
+              type="button" (click)="duplicateCheck()">중복확인</button>
+            <mat-error *ngIf="user_id?.invalid || user_id?.errors">{{getUserIdErrorMessage()}}</mat-error>
             <mat-hint>영문, 숫자로만 이루어진 3-15자 아이디만 가능합니다.</mat-hint>
           </mat-form-field>
         </div>
