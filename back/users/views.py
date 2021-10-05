@@ -13,11 +13,20 @@ from django.contrib.auth import login, authenticate
 from .decorators import *
 from .models import User
 
+from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.settings import api_settings
+from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
 from .serializers import UserSerializer
 
-class SignInView(View):
+from rest_framework.decorators import api_view, renderer_classes
+
+class SignInAPI(APIView):
+    permission_classes = (permissions.AllowAny,)
+    #@api_view(['POST'])
     def post(self, request):
         data = json.loads(request.body)
         user_id = data['user_id']
@@ -25,12 +34,17 @@ class SignInView(View):
         user = authenticate(username=user_id, password=pw)
         print(user)
         if user:
-            login(request,user)
-            return HttpResponse(status=200)
+            token, created = Token.objects.get_or_create(user=user)
+            serializer = UserSerializer(user)
+            print(token, created)
+            return Response({'token':token.key, 'id':user.id}, status=200)
         else:
             return HttpResponse(status=401)
 
 class UserListAPI(APIView):
+
+    permission_classes = (permissions.AllowAny,)
+
     def get(self, request):
         queryset = User.objects.all()
         print(queryset)
@@ -55,5 +69,16 @@ class UserListAPI(APIView):
         user.save()
         serializer = UserSerializer(user)
         return Response(serializer.data,status=200)
+
+class UserAPI(APIView):
+
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, id):
+        print(request)
+        user = User.objects.get(id=id)
+        print(user)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
 # Create your views here.

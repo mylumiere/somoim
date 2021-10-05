@@ -20,7 +20,7 @@ export class UserService {
   private log(message: string) {
     this.messageService.add(`UserService: ${message}`);
   }
-  private usersUrl = 'api/users/';
+  private usersUrl = 'api/users';
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
@@ -59,7 +59,8 @@ export class UserService {
     obj, this.httpOptions).pipe(
       tap((res: any) => {
         console.log(res)
-        //localStorage.setItem('access_token', res.token)
+        console.log(res.token)
+        localStorage.setItem('auth_token', res.token)
         this.getUser(res.id).subscribe((res) => {
           this.currentUser = res;
           console.log(this.currentUser)
