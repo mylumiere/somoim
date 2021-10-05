@@ -1,19 +1,12 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <a class="navs" mat-button routerLink="">{{title}}</a>
+  <a class="navs" mat-button routerLink="">Somoim</a>
   <a class="navs" mat-button routerLink="/about">About</a>
-  <a class="navs" mat-button routerLink="/articles">Articles</a>
+  <a *ngIf="signedInUser" class="navs" mat-button routerLink="/articles">Articles</a>
   <span class="spacer"></span>
-  <a class="navs" mat-stroked-button routerLink="/sign_in">Sign_in</a>
-  <a class="navs" mat-stroked-button routerLink="/sign_up">Sign_up</a>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
+  <a *ngIf="!signedInUser" class="navs" mat-raised-button color="primary" routerLink="/sign_in">로그인</a>
+  <a *ngIf="!signedInUser" class="navs" mat-raised-button color="accent" routerLink="/sign_up">회원가입</a>
+  <span *ngIf="signedInUser">{{signedInUser.user_id}}</span>
+  <a *ngIf="signedInUser" class="navs" mat-raised-button color="primary" (click)="logout()">로그아웃</a>
 </mat-toolbar>
 <router-outlet></router-outlet>
 <app-messages></app-messages>

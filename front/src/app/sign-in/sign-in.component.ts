@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-sign-in',
@@ -25,7 +26,6 @@ export class SignInComponent implements OnInit {
       password: new FormControl('')
     })
   }
-
 
   onSubmit() {
     console.log(this.signInForm.value)
