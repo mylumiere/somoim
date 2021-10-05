@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os, json
+import os, json, datetime
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    #'corsheaders',
     'rest_framework.authtoken',
 ]
 
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'back.urls'
@@ -178,3 +180,33 @@ EMAIL_USE_TLS = True
 # TLS 보안 방법
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # 사이트와 관련한 자동응답을 받을 이메일 주소,'webmaster@localhost'
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
+
+"""
+REST_USE_JWT = True
+
+JWT_AUTH = {
+    'JWT_SECRET_KEY': SECRET_KEY,
+    'JWT_ALGORITHM': 'HS256', # 암호화 알고리즘
+    'JWT_ALLOW_REFRESH': True, # refresh 사용 여부
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7), # 유효기간 설정
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28), # JWT 토큰 갱신 유효기간
+    # import datetime 상단에 import 하기
+}
+
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:4200',
+)
+"""
