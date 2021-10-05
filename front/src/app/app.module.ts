@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // For material
 import { MatNativeDateModule } from '@angular/material/core';
@@ -35,6 +35,8 @@ import { UniqueDialogComponent } from './sign-up/unique-dialog/unique-dialog.com
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { AuthService } from './auth.service';
+
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,7 @@ import { AuthService } from './auth.service';
     {provide:MAT_DATE_LOCALE, useValue:'ko-KR'},
     {provide:MAT_DATE_FORMATS, useValue:MY_FORMATS},
     AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

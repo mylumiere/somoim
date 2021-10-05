@@ -4,17 +4,18 @@
       <img class="logo" src="../../assets/logo_transparent.png"/>
     </div>
     <div class="main-row">
-      <mat-grid-list cols="3" rowHeight="60px">
+      <mat-grid-list cols="3" rowHeight="80px">
         <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
           <mat-grid-tile [colspan]="2" [rowspan]="2">
             <div>
-              <mat-form-field>
+              <mat-form-field style="width: 240px;" appearance="outline">
                 <mat-label>아이디</mat-label>
                 <input matInput formControlName="user_id" placeholder="아이디"/>
               </mat-form-field>
-              <mat-form-field>
+              <mat-form-field style="width: 240px;" appearance="outline">
                 <mat-label>비밀번호</mat-label>
                 <input matInput type="password" formControlName="password" placeholder="비밀번호"/>
+                <mat-error *ngIf="errorSignIn">{{errorSignIn}}</mat-error>
               </mat-form-field>
             </div>
           </mat-grid-tile>

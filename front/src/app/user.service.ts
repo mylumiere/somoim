@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -16,7 +16,6 @@ export class UserService {
     private messageService: MessageService,
     public router: Router,
     ) { }
-  
   private log(message: string) {
     this.messageService.add(`UserService: ${message}`);
   }
@@ -29,12 +28,12 @@ export class UserService {
     };
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  auth_token = this.getToken()
+  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl)
+    console.log(2)
+    return this.http.get<User[]>(this.usersUrl, this.httpOptions)
     .pipe(
       tap(_ => this.log('fetched users')),
       catchError(this.handleError<User[]>('getUsers',[]))
@@ -54,17 +53,20 @@ export class UserService {
   currentUser: User
   signedIn: EventEmitter<any> = new EventEmitter<any>();
 
-  signIn(obj) {
+  signIn(obj): Observable<User> {
+    console.log(this.httpOptions)
     return this.http.post<User>(`${this.usersUrl}sign_in/`, 
     obj, this.httpOptions).pipe(
       tap((res: any) => {
+        console.log(res);
         localStorage.setItem('auth_token', res.token)
-        this.getUser(res.id).subscribe((res) => {
+        this.getUser(res.user_id).subscribe((res) => {
           this.currentUser = res;
           this.signedIn.emit(this.currentUser);
           console.log(this.currentUser);
         })
-      })
+      }),
+      catchError(this.handleError<User>('signIn'))
     )
   }
 
@@ -76,22 +78,26 @@ export class UserService {
     localStorage.removeItem('auth_token')
   }
 
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.usersUrl}${id}/`).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<User>(`getUser id=${id}`))
+  getUser(user_id: string): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}${user_id}/`,this.httpOptions).pipe(
+      tap(_ => this.log(`fetched hero id=${user_id}`)),
+      catchError(this.handleError<User>(`getUser id=${user_id}`))
     )
   }
 
-  /*
-
-  getArticle(id: number): Observable<Article> {
-    const url = `${this.articlesUrl}/${id}`;
-    return this.http.get<Article>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Article>(`getArticle id=${id}`))
+  getSignedInUser(): Observable<User> {
+    return this.http.get<User>(`api/`,this.httpOptions).pipe(
+      tap(res => {
+        this.getUser(res.user_id).subscribe(
+          user => this.currentUser = user
+        )
+        this.log(`fetched`)
+      }),
+      catchError(this.handleError<User>(`getUser`))
     );
   }
+
+  /*
 
   updateArticle(article: Article): Observable<any> {
     return this.http.put(this.articlesUrl, article, this.httpOptions).pipe(
@@ -100,19 +106,5 @@ export class UserService {
     )
   }
 
-  addArticle(article: Article): Observable<Article> {
-    return this.http.post<Article>(this.articlesUrl, article, this.httpOptions).pipe(
-      tap((newArticle: Article) => this.log(`added article w/ id=${newArticle.id}`)),
-      catchError(this.handleError<Article>('addArticle'))
-    );
-  }
-
-  deleteArticle(id: number): Observable<Article> {
-    const url = `${this.articlesUrl}/${id}`;
-    return this.http.delete<Article>(url,this.httpOptions).pipe(
-      tap(_ => this.log(`deleted article id=${id}`)),
-      catchError(this.handleError<Article>('deleteArticle'))
-    );
-  }
-  */
+*/
 }

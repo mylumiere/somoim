@@ -22,9 +22,20 @@ from .serializers import UserSerializer
 
 from rest_framework.decorators import api_view, renderer_classes
 
+class SignedInUserAPI(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def get(self, request):
+        if 'Authorization' not in request.headers: return HttpResponse(status=404)
+        auth_token = request.headers['Authorization']
+        print(auth_token)
+        user = User.objects.get(auth_token=auth_token)
+        if user:
+            return Response({'user_id':user.user_id}, status=200)
+        else:
+            return HttpResponse(status=404)
+
 class SignInAPI(APIView):
     permission_classes = (permissions.AllowAny,)
-    #@api_view(['POST'])
     def post(self, request):
         data = json.loads(request.body)
         user_id = data['user_id']
@@ -33,7 +44,7 @@ class SignInAPI(APIView):
         print(user)
         if user:
             token, created = Token.objects.get_or_create(user=user)
-            return Response({'token':token.key, 'id':user.id}, status=200)
+            return Response({'token':token.key, 'user_id':user.user_id}, status=200)
         else:
             return HttpResponse(status=401)
 
@@ -68,9 +79,8 @@ class UserListAPI(APIView):
 class UserAPI(APIView):
     permission_classes = (permissions.AllowAny,)
 
-    def get(self, request, id):
-        print(request)
-        user = User.objects.get(id=id)
+    def get(self, request, user_id):
+        user = User.objects.get(user_id=user_id)
         print(user)
         serializer = UserSerializer(user)
         return Response(serializer.data)
