@@ -8,13 +8,4 @@ import { User } from './models/user';
 export class AuthService {
 
   constructor() { }
-  
-  setJWT(jwt) {
-    localStorage.setItem('JWT_token',jwt);
-  }
-
-  getJWT(jwt) {
-    localStorage.getItem('JWT_token');
-  }
-
 }

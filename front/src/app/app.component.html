@@ -6,7 +6,7 @@
   <a *ngIf="!signedInUser" class="navs" mat-raised-button color="primary" routerLink="/sign_in">로그인</a>
   <a *ngIf="!signedInUser" class="navs" mat-raised-button color="accent" routerLink="/sign_up">회원가입</a>
   <span *ngIf="signedInUser">{{signedInUser.user_id}}</span>
-  <a *ngIf="signedInUser" class="navs" mat-raised-button color="primary" (click)="logout()">로그아웃</a>
+  <a *ngIf="signedInUser" class="navs" mat-raised-button color="primary" (click)="logOut()">로그아웃</a>
 </mat-toolbar>
 <router-outlet></router-outlet>
 <app-messages></app-messages>

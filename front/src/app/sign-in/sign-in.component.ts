@@ -17,8 +17,9 @@ export class SignInComponent implements OnInit {
   ) { }
 
   signInForm: FormGroup;
-  user_id: string;
-  password: string;
+  //user_id: string;
+  //password: string;
+  errorSignIn: string;
 
   ngOnInit(): void {
     this.signInForm = new FormGroup({
@@ -27,13 +28,26 @@ export class SignInComponent implements OnInit {
     })
   }
 
+  get user_id() {
+    return this.signInForm.get('user_id');
+  }
+  get password() {
+    return this.signInForm.get('password');
+  }
+
   onSubmit() {
     console.log(this.signInForm.value)
     this.userService.signIn(this.signInForm.value)
-    .subscribe(user => {
-      if(user) {
-        console.log(user)
+    .subscribe(res => {
+      if(res) {
         this.router.navigate(['/articles'])
+      }
+      else {
+        this.user_id?.setErrors({invalid:true});
+        this.password?.setErrors({invalid:true});
+        this.user_id?.updateValueAndValidity;
+        this.password?.updateValueAndValidity;
+        this.errorSignIn = "존재하지 않는 아이디이거나, 비밀번호가 틀렸습니다.";
       }
     })
   }
