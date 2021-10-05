@@ -18,8 +18,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.settings import api_settings
 from rest_framework import permissions
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
 from .serializers import UserSerializer
 
 from rest_framework.decorators import api_view, renderer_classes
@@ -35,14 +33,11 @@ class SignInAPI(APIView):
         print(user)
         if user:
             token, created = Token.objects.get_or_create(user=user)
-            serializer = UserSerializer(user)
-            print(token, created)
             return Response({'token':token.key, 'id':user.id}, status=200)
         else:
             return HttpResponse(status=401)
 
 class UserListAPI(APIView):
-
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request):
@@ -71,7 +66,6 @@ class UserListAPI(APIView):
         return Response(serializer.data,status=200)
 
 class UserAPI(APIView):
-
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request, id):

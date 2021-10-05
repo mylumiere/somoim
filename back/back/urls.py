@@ -16,8 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users.views import SignInAPI, UserListAPI, UserAPI
-from rest_framework_jwt.views import obtain_jwt_token
-from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('users/', include('users.urls')),
@@ -26,5 +24,4 @@ urlpatterns = [
     path('api/users/sign_in/', SignInAPI.as_view()),
     path('api/users/', UserListAPI.as_view()),
     path('api/users/<int:id>/', UserAPI.as_view()),
-    path('api/token/', obtain_jwt_token),
 ]

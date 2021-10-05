@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class UserService {
   private log(message: string) {
     this.messageService.add(`UserService: ${message}`);
   }
-  private usersUrl = 'api/users';
+  private usersUrl = 'api/users/';
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
@@ -52,25 +52,32 @@ export class UserService {
   }
 
   currentUser: User
+  signedIn: EventEmitter<any> = new EventEmitter<any>();
 
   signIn(obj) {
-    console.log(obj)
-    return this.http.post<User>(`${this.usersUrl}/sign_in/`, 
+    return this.http.post<User>(`${this.usersUrl}sign_in/`, 
     obj, this.httpOptions).pipe(
       tap((res: any) => {
-        console.log(res)
-        console.log(res.token)
         localStorage.setItem('auth_token', res.token)
         this.getUser(res.id).subscribe((res) => {
           this.currentUser = res;
-          console.log(this.currentUser)
+          this.signedIn.emit(this.currentUser);
+          console.log(this.currentUser);
         })
       })
     )
   }
 
+  getToken(): string {
+    return localStorage.getItem('auth_token')
+  }
+
+  signOut(): void {
+    localStorage.removeItem('auth_token')
+  }
+
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.usersUrl}/${id}/`).pipe(
+    return this.http.get<User>(`${this.usersUrl}${id}/`).pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
       catchError(this.handleError<User>(`getUser id=${id}`))
     )
