@@ -34,8 +34,6 @@ import { DuplicatedDialogComponent } from './sign-up/duplicated-dialog/duplicate
 import { UniqueDialogComponent } from './sign-up/unique-dialog/unique-dialog.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-import { AuthService } from './auth.service';
-
 import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
@@ -84,7 +82,6 @@ import { AuthInterceptor } from './auth.interceptor';
     MatDatepickerModule,
     {provide:MAT_DATE_LOCALE, useValue:'ko-KR'},
     {provide:MAT_DATE_FORMATS, useValue:MY_FORMATS},
-    AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
