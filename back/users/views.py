@@ -1,34 +1,22 @@
 import json
-import bcrypt
 from datetime import datetime
 import pytz
 from django.utils import timezone
 
-from django.shortcuts import render, redirect
-from django.utils.decorators import method_decorator
-from django.views import View
-from django.http import JsonResponse
-from django.contrib import auth
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate
 from .decorators import *
 from .models import User
 
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.settings import api_settings
 from rest_framework import permissions
 from .serializers import UserSerializer
-
-from rest_framework.decorators import api_view, renderer_classes
 
 class SignedInUserAPI(APIView):
     permission_classes = (permissions.AllowAny,)
     def get(self, request):
-        if 'Authorization' not in request.headers: return HttpResponse(status=404)
-        auth_token = request.headers['Authorization']
-        print(auth_token)
-        user = User.objects.get(auth_token=auth_token)
+        user = request.user
         if user:
             return Response({'user_id':user.user_id}, status=200)
         else:
@@ -84,5 +72,3 @@ class UserAPI(APIView):
         print(user)
         serializer = UserSerializer(user)
         return Response(serializer.data)
-
-# Create your views here.

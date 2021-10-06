@@ -49,7 +49,8 @@ export class ArticleService {
   }
 
   updateArticle(article: Article): Observable<any> {
-    return this.http.put(this.articlesUrl, article, this.httpOptions).pipe(
+    const url = `${this.articlesUrl}/${article.id}`;
+    return this.http.put(url, article, this.httpOptions).pipe(
       tap(_ => this.log(`updated article id=${article.id}`)),
       catchError(this.handleError<any>(`updatedHero`))
     )

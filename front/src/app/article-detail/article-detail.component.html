@@ -6,6 +6,10 @@
     <label for="article-title">Article title: </label>
     <input id="article-title" [(ngModel)]="article.title" placeholder="title">
   </div>
+  <div>
+    <label for="article-content">Article content: </label>
+    <input id="article-content" [(ngModel)]="article.content" placeholder="content">
+  </div>
   <button (click)="save()">save</button>
   <button (click)="goBack()">go back</button>
 </div>
