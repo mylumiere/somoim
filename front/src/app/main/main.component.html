@@ -1,13 +1,56 @@
+<div class="banner"></div>
 <div class="content">
-  <a>this works</a>
-  <div>
-    <ul class="articles">
-      <li *ngFor="let article of articles">
-        <a routerLink="/article/{{article.id}}">
-          <span class="badge">{{article.id}}</span> {{article.title}}{{article.content}}
-        </a>
-        <button class="delete" title="delete article">x</button>
-      </li>
-    </ul>
-  </div>
+  <div style="width: 100%; height: 40px;"></div>
+  <mat-grid-list cols="3" rowHeight="360px" [gutterSize]="'20px'">
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <div class="small-content">
+        <div class="small-content-header">
+          <a class="small-content-title">마감 임박! 어서 들어와요</a>
+          <a class="small-content-subtitle">지역의 인기 있는 소모임</a>
+          <span class="spacer"></span>
+          <a class="small-content-subtitle">서울</a>
+          <a class="small-content-subtitle">|</a>
+          <a class="small-content-subtitle content-router" routerLink="/articles">
+            <mat-icon style="font-size: 16px; height: 16px; width: 20px;">add_circle_outline</mat-icon>더보기
+          </a>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <div class="small-content">
+        <div class="account">
+          계정 관련 정보가 표시될 자리입니다.
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="2">
+      <div class="small-content">
+        <div class="small-content-header">
+          <a class="small-content-title">함께하고 싶어요</a>
+          <a class="small-content-subtitle">빠르게 소모임을 구하는 게시글</a>
+          <span class="spacer"></span>
+          <a class="small-content-subtitle">{{articles.length}}개의 글</a>
+          <a class="small-content-subtitle">|</a>
+          <a class="small-content-subtitle content-router" routerLink="/articles">
+            <mat-icon style="font-size: 16px; height: 16px; width: 20px;">add_circle_outline</mat-icon>더보기
+          </a>
+        </div>
+        <div style="width: 100%;">
+          <ul class="articles">
+            <li *ngFor="let article of articles">
+              <a routerLink="/article/{{article.id}}">
+                <span class="badge">{{article.id}}</span> {{article.title}}{{article.content}}
+              </a>
+              <button class="delete" title="delete article">x</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <div class="small-content">div</div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+
 </div>
