@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+
+import { Article } from '../models/article';
+
+import { ArticleService } from '../article.service';
 
 @Component({
   selector: 'app-main',
@@ -8,9 +11,16 @@ import { FormControl } from '@angular/forms';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  articles: Article[] = []
+
+  constructor(
+    private articleService: ArticleService,
+  ) { }
 
   ngOnInit(): void {
+    this.articleService.getArticles().subscribe(
+      articles => this.articles = articles
+    )
   }
 
 }

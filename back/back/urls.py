@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users.views import SignInAPI, UserListAPI, UserAPI, SignedInUserAPI
+from board.views import ArticleListView, ArticleView
 
 urlpatterns = [
     path('users/', include('users.urls')),
-    path('board/', include('board.urls')),
+    path('api/board/', include('board.urls')),
     path('admin/', admin.site.urls),
     path('api/', SignedInUserAPI.as_view()),
     path('api/users/sign_in/', SignInAPI.as_view()),
     path('api/users/', UserListAPI.as_view()),
     path('api/users/<str:user_id>/', UserAPI.as_view()),
+    path('api/articles/', ArticleListView.as_view(), name='article_list'),
+    path('api/articles/<int:id>', ArticleView.as_view(), name='article_detail'),
 ]
