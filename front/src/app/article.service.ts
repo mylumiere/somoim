@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Article } from './models/article';
-import { ARTICLES } from './mock-articles';
 
 import { MessageService } from './message.service';
 

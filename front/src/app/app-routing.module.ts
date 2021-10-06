@@ -9,11 +9,12 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { AuthGuard } from './auth/auth.guard';
+import { AuthInverseGuard } from './auth/auth-inverse.guard';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
-  { path: 'sign_in', component: SignInComponent},
-  { path: 'sign_up', component: SignUpComponent},
+  { path: 'sign_in', component: SignInComponent, canActivate: [AuthInverseGuard]},
+  { path: 'sign_up', component: SignUpComponent, canActivate: [AuthInverseGuard]},
   { path: 'about', component: InfoComponent},
   { path: 'articles', component: ArticlesComponent, canActivate: [AuthGuard]},
   { path: 'article/:id', component: ArticleDetailComponent },

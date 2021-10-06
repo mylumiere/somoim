@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Somoim';
-  signedInUserId: string;
   signedInUser: User;
 
   constructor(
@@ -22,14 +21,6 @@ export class AppComponent {
     this.userService.getSignedInUser().subscribe(
       (res) => this.signedInUser = res
     )
-    /*
-    this.signedInUserId = localStorage.getItem('signedInUserId')
-    if (this.signedInUserId) {
-      this.userService.getUser(this.signedInUserId).subscribe(
-        (res) => this.signedInUser = res
-      )
-    }
-    */
     this.userService.signedIn.subscribe(
       () => this.signedInUser = this.userService.currentUser);
   }

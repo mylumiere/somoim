@@ -7,7 +7,7 @@ import { UserService } from '../user.service'
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthInverseGuard implements CanActivate {
   constructor(
     private router: Router,
     private userService: UserService,
@@ -17,10 +17,11 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       this.token = this.userService.getToken()
-      if (this.token) { return true }
+      if (!this.token) { return true }
       else {
-        this.router.navigate(['/sign_in']);
+        this.router.navigate(['/articles']);
         return false;
       }
   }
+  
 }
