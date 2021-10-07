@@ -54,15 +54,15 @@ export class MainComponent implements OnInit {
   arrayDays = [...Array(7).keys()];
 
   today = new Date();
+  selectedDate = this.today;
   year = this.today.getFullYear();
   month = this.today.getMonth()+1;
+  date = this.today.getDate();
   numDates = new Date(this.year,this.month,0).getDate();
   firstDay = new Date(this.year,this.month-1,1).getDay();
   firstSunday = 1-this.firstDay;
   numWeeks = Math.ceil((this.numDates-this.firstSunday)/7)+1
   arrayWeeks = [...Array(this.numWeeks).keys()];
-
-  selectedDate: Date;
 
   toLastMonth(): void {
     let lastMonth = new Date(this.year, this.month-2);
