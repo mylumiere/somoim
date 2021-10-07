@@ -17,10 +17,7 @@ import { Router } from '@angular/router';
 export class MainComponent implements OnInit {
 
   articles: Article[] = []
-  selectedDate: string;
   signedInUser: User;
-
-
 
   constructor(
     private articleService: ArticleService,
@@ -65,6 +62,8 @@ export class MainComponent implements OnInit {
   numWeeks = Math.ceil((this.numDates-this.firstSunday)/7)+1
   arrayWeeks = [...Array(this.numWeeks).keys()];
 
+  selectedDate: Date;
+
   toLastMonth(): void {
     let lastMonth = new Date(this.year, this.month-2);
     this.moveMonth(lastMonth);
@@ -85,4 +84,26 @@ export class MainComponent implements OnInit {
     this.arrayWeeks = [...Array(this.numWeeks).keys()];
   }
 
+  validDates(dayIdx: number, weekIdx: number): boolean {
+    return (this.firstSunday + dayIdx + weekIdx*7) <= this.numDates && (this.firstSunday + dayIdx + weekIdx*7) >= 1;
+  }
+
+  isToday(dayIdx: number, weekIdx: number): boolean {
+    return (this.today.getFullYear() == this.year &&
+    this.today.getMonth() + 1 == this.month && 
+    this.today.getDate() == (this.firstSunday + dayIdx + weekIdx*7));
+  }
+
+  selectDate(dayIdx: number, weekIdx: number): void {
+    this.selectedDate = new Date(this.year,this.month-1,(this.firstSunday + dayIdx + weekIdx*7));
+  }
+
+  isSelectedDate(dayIdx: number, weekIdx: number): boolean {
+    if (!this.selectedDate) {
+      return false
+    }
+    return (this.selectedDate.getFullYear() == this.year &&
+    this.selectedDate.getMonth() + 1 == this.month && 
+    this.selectedDate.getDate() == (this.firstSunday + dayIdx + weekIdx*7));
+  }
 }
