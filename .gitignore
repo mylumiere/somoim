@@ -1,2 +1,5 @@
 secrets.json
 .DS_Store
+Lib/
+Scripts/
+pyvenv.cfg

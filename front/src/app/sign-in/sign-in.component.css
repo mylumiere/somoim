@@ -31,19 +31,19 @@
 }
 
 .kakao-button {
-  background-image: url('../../assets/kakaotalk_logo_icon_147272.svg');
+  background-image: url('../../assets/kakao-icon.svg');
 }
 
 .naver-button {
-  background-image: url('../../assets/btnG_아이콘원형.png');
+  background-image: url('../../assets/naver-icon.png');
 }
 
 .google-button {
-  background-image: url('../../assets/pngkit_mpaa-logo-png_1783296.png');
+  background-image: url('../../assets/google-icon.png');
 }
 
 .facebook-button {
-  background-image: url('../../assets/facebook-round-icon-png-22.jpg');
+  background-image: url('../../assets/facebook-icon.jpg');
 }
 
 h3 {

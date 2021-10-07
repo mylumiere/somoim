@@ -1,7 +1,4 @@
 import { Component} from '@angular/core';
-import { User } from './models/user';
-import { UserService } from './user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,24 +7,4 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Somoim';
-  signedInUser: User;
-
-  constructor(
-    private userService: UserService,
-    private router: Router,
-  ) { }
-
-  ngOnInit() {
-    this.userService.getSignedInUser().subscribe(
-      (res) => this.signedInUser = res
-    )
-    this.userService.signedIn.subscribe(
-      () => this.signedInUser = this.userService.currentUser);
-  }
-
-  logOut(): void {
-    this.userService.signOut();
-    this.signedInUser = null;
-    this.router.navigate(['/sign_in'])
-  }
 }

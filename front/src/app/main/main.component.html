@@ -1,38 +1,79 @@
 <div class="banner"></div>
 <div class="content">
-  <div style="width: 100%; height: 40px;"></div>
+  <div style="width: 100%; height: 20px;"></div>
   <mat-grid-list cols="3" rowHeight="360px" [gutterSize]="'20px'">
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <div class="small-content">
         <div class="small-content-header">
-          <a class="small-content-title">마감 임박! 어서 들어와요</a>
-          <a class="small-content-subtitle">지역의 인기 있는 소모임</a>
+          <a class="small-content-title">마감 임박! 인기있는 소모임</a>
+          <a class="small-content-subtitle">지역별 인기 소모임</a>
           <span class="spacer"></span>
           <a class="small-content-subtitle">서울</a>
           <a class="small-content-subtitle">|</a>
           <a class="small-content-subtitle content-router" routerLink="/articles">
-            <mat-icon style="font-size: 16px; height: 16px; width: 20px;">add_circle_outline</mat-icon>더보기
+            <mat-icon class="small-content subtitle content-icon">add_circle_outline</mat-icon>더보기
           </a>
         </div>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
       <div class="small-content">
-        <div class="account">
-          계정 관련 정보가 표시될 자리입니다.
+        <div *ngIf="signedInUser" class="account">
+          <div class="account-header">
+            <div class="account-img"></div>
+            <div class="account-info">
+              <div class="account-info-rows">
+                <div class="account-info-row">
+                  <a class="small-content-title">{{signedInUser.name}}</a>
+                  <a class="small-content-subtitle">|</a>
+                  <a class="small-content-subtitle">내 정보</a>
+                </div>
+                <div class="account-info-row">
+                  <a class="small-content-subtitle">{{signedInUser.email}}</a>
+                </div>
+              </div>
+            </div>
+            <div class="account-service">
+              <div class="account-service-buttons">
+                <button mat-flat-button class="account-service-button" color="disabled" (click)="logOut()">로그아웃</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!signedInUser" class="account">
+          <a mat-raised-button color="primary" routerLink="/sign_in">로그인</a>
+          <a mat-raised-button color="accent" routerLink="/sign_up">회원가입</a>
+        </div>
+        <div class="small-content-header">
+          <a class="small-content-title">내 일정</a>
+          <span class="spacer"></span>
+          <a class="small-content-subtitle">{{articles.length}}개의 일정</a>
+          <a class="small-content-subtitle">|</a>
+          <a class="small-content-subtitle content-router" routerLink="/articles">
+            <mat-icon class="small-content subtitle content-icon">add_circle_outline</mat-icon>더보기
+          </a>
+        </div>
+        <div class="schedule">
+          <div class="schedule-calendar">
+            <mat-calendar #calendar [(selected)]="selectedDate">
+            </mat-calendar>
+          </div>
+          <div class="schedule-info">
+            InfoInfoInfoInfov InfoInfovvInfovvvvInfov vInfo v Info Info Info Info Info 
+          </div>
         </div>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="2" [rowspan]="2">
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
       <div class="small-content">
         <div class="small-content-header">
-          <a class="small-content-title">함께하고 싶어요</a>
-          <a class="small-content-subtitle">빠르게 소모임을 구하는 게시글</a>
+          <a class="small-content-title">함께해요</a>
+          <a class="small-content-subtitle">따끈따끈한 소모임 모집 게시글</a>
           <span class="spacer"></span>
           <a class="small-content-subtitle">{{articles.length}}개의 글</a>
           <a class="small-content-subtitle">|</a>
           <a class="small-content-subtitle content-router" routerLink="/articles">
-            <mat-icon style="font-size: 16px; height: 16px; width: 20px;">add_circle_outline</mat-icon>더보기
+            <mat-icon class="small-content subtitle content-icon">add_circle_outline</mat-icon>더보기
           </a>
         </div>
         <div style="width: 100%;">
@@ -47,10 +88,5 @@
         </div>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="2">
-      <div class="small-content">div</div>
-    </mat-grid-tile>
   </mat-grid-list>
-
-
 </div>
