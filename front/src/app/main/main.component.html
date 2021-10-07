@@ -39,30 +39,77 @@
               </div>
             </div>
           </div>
-          <div class="small-content-header">
-            <a class="small-content-title">내 일정</a>
-            <span class="spacer"></span>
-            <a class="small-content-subtitle">{{articles.length}}개의 일정</a>
-            <a class="small-content-subtitle">|</a>
-            <a class="small-content-subtitle content-router" routerLink="/articles">
-              <mat-icon class="small-content subtitle content-icon">add_circle_outline</mat-icon>더보기
-            </a>
-          </div>
-          <div class="schedule">
-            <div class="schedule-calendar">
-              <mat-calendar #calendar [(selected)]="selectedDate">
-              </mat-calendar>
-            </div>
-            <div class="schedule-info">
-              InfoInfoInfoInfov InfoInfovvInfovvvvInfov vInfo v Info Info Info Info Info 
-            </div>
-          </div>
+          <mat-tab-group mat-stretch-tabs dynamicHeight [backgroundColor]="'primary'">
+            <mat-tab class="account-tab" label="일정">
+              <div class="schedule">
+                <div class="schedule-calendar">
+                  <mat-calendar #calendar [(selected)]="selectedDate">
+                  </mat-calendar>
+                  <div>{{today}}</div>
+                  <div>{{year}}</div>
+                  <div>{{month}}</div>
+                  <div>{{numWeeks}}</div>
+                  <div class="calendar-header">
+                    <button mat-icon-button (click)="toLastMonth()">
+                      <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <span class="spacer"></span>
+                    <div class="calendar-header-yearmonth">
+                      <div class="calendar-year">{{year}}</div>
+                      <div class="calendar-month">{{month}}</div>
+                    </div>
+                    <span class="spacer"></span>
+                    <button mat-icon-button (click)="toNextMonth()">
+                      <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
+                  </div>
+                  <div class="calendar-body">
+                    <table class="calendar-body-table">
+                      <tr class="calendar-body-header">
+                        <td class="calendar-body-header" *ngFor="let day of days">{{day}}</td>
+                      </tr>
+                      <tr *ngFor="let weekIdx of arrayWeeks">
+                        <td *ngFor="let dayIdx of arrayDays">
+                          {{(firstSunday + dayIdx + weekIdx*7) <= numDates &&
+                            (firstSunday + dayIdx + weekIdx*7) >= 1 ?
+                            (firstSunday + dayIdx + weekIdx*7) : '' }}
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <div class="schedule-info">
+                  <div class="schedule-info-header">
+                    <a class="small-content-subtitle">1234개의 일정</a>
+                    <a class="small-content-subtitle content-router" routerLink="/articles">
+                      <mat-icon class="small-content subtitle content-icon">add_circle_outline</mat-icon>크게보기
+                    </a>
+                  </div>
+                  InfoInfoInfoInfov InfoInfovvInfovvvvInfov vInfo v Info Info Info Info Info 
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab class="account-tab" label="모임">
+              <div class="example-large-box mat-elevation-z4">
+                Working On!
+              </div>
+            </mat-tab>
+            <mat-tab class="account-tab" label="글">
+              <div class="example-large-box mat-elevation-z4">
+                Working On!
+              </div>
+            </mat-tab>
+            <mat-tab class="account-tab" label="친구">
+              <div class="example-large-box mat-elevation-z4">
+                Working On!
+              </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
         <div *ngIf="!signedInUser" class="account">
           <a mat-raised-button color="primary" routerLink="/sign_in">로그인</a>
           <a mat-raised-button color="accent" routerLink="/sign_up">회원가입</a>
         </div>
-
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1">

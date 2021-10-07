@@ -102,7 +102,53 @@
   width: 40%;
 }
 
+.schedule-info-header {
+  text-align: end;
+}
+
 .content-router {
   display: flex;
   text-decoration: none !important;
+}
+
+:host ::ng-deep .mat-tab-label {
+  min-width: 25% !important;
+}
+
+.calendar-header {
+  width: 100%;
+  display: flex;
+}
+
+.calendar-header-yearmonth {
+  text-align: center;
+}
+
+.calendar-year {
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 16px;
+  color: grey;
+}
+
+.calendar-month {
+  font-size: 16px;
+}
+
+.calendar-body {
+  width: 100%;
+  padding: 0 2% 2% 2%;
+  text-align: center;
+}
+
+.calendar-body-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-body-header {
+  padding: 0;
+  font-size: 12px;
+  color: grey;
+  border-bottom: 1px solid grey;
 }
