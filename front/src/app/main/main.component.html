@@ -43,8 +43,6 @@
             <mat-tab class="account-tab" label="일정">
               <div class="schedule">
                 <div class="schedule-calendar">
-                  <mat-calendar #calendar [(selected)]="selectedDate">
-                  </mat-calendar>
                   <div>{{today}}</div>
                   <div>{{year}}</div>
                   <div>{{month}}</div>
@@ -70,9 +68,26 @@
                       </tr>
                       <tr *ngFor="let weekIdx of arrayWeeks">
                         <td *ngFor="let dayIdx of arrayDays">
-                          {{(firstSunday + dayIdx + weekIdx*7) <= numDates &&
-                            (firstSunday + dayIdx + weekIdx*7) >= 1 ?
-                            (firstSunday + dayIdx + weekIdx*7) : '' }}
+                          <button mat-flat-button class="calendar-body-date" color="primary"
+                          *ngIf="isSelectedDate(dayIdx, weekIdx)">
+                            {{(firstSunday + dayIdx + weekIdx*7) <= numDates &&
+                              (firstSunday + dayIdx + weekIdx*7) >= 1 ?
+                              (firstSunday + dayIdx + weekIdx*7) : '' }}
+                          </button>
+                          <button mat-stroked-button class="calendar-body-date" color="primary"
+                          *ngIf="isToday(dayIdx, weekIdx) && !isSelectedDate(dayIdx, weekIdx)"
+                          (click)="selectDate(dayIdx, weekIdx)">
+                            {{(firstSunday + dayIdx + weekIdx*7) <= numDates &&
+                              (firstSunday + dayIdx + weekIdx*7) >= 1 ?
+                              (firstSunday + dayIdx + weekIdx*7) : '' }}
+                          </button>
+                          <button mat-button class="calendar-body-date" color="primary"
+                          *ngIf="validDates(dayIdx, weekIdx) && !isToday(dayIdx, weekIdx) && !isSelectedDate(dayIdx, weekIdx)"
+                          (click)="selectDate(dayIdx, weekIdx)">
+                            {{(firstSunday + dayIdx + weekIdx*7) <= numDates &&
+                              (firstSunday + dayIdx + weekIdx*7) >= 1 ?
+                              (firstSunday + dayIdx + weekIdx*7) : '' }}
+                          </button>
                         </td>
                       </tr>
                     </table>
