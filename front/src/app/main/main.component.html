@@ -39,29 +39,30 @@
               </div>
             </div>
           </div>
+          <div class="small-content-header">
+            <a class="small-content-title">내 일정</a>
+            <span class="spacer"></span>
+            <a class="small-content-subtitle">{{articles.length}}개의 일정</a>
+            <a class="small-content-subtitle">|</a>
+            <a class="small-content-subtitle content-router" routerLink="/articles">
+              <mat-icon class="small-content subtitle content-icon">add_circle_outline</mat-icon>더보기
+            </a>
+          </div>
+          <div class="schedule">
+            <div class="schedule-calendar">
+              <mat-calendar #calendar [(selected)]="selectedDate">
+              </mat-calendar>
+            </div>
+            <div class="schedule-info">
+              InfoInfoInfoInfov InfoInfovvInfovvvvInfov vInfo v Info Info Info Info Info 
+            </div>
+          </div>
         </div>
         <div *ngIf="!signedInUser" class="account">
           <a mat-raised-button color="primary" routerLink="/sign_in">로그인</a>
           <a mat-raised-button color="accent" routerLink="/sign_up">회원가입</a>
         </div>
-        <div class="small-content-header">
-          <a class="small-content-title">내 일정</a>
-          <span class="spacer"></span>
-          <a class="small-content-subtitle">{{articles.length}}개의 일정</a>
-          <a class="small-content-subtitle">|</a>
-          <a class="small-content-subtitle content-router" routerLink="/articles">
-            <mat-icon class="small-content subtitle content-icon">add_circle_outline</mat-icon>더보기
-          </a>
-        </div>
-        <div class="schedule">
-          <div class="schedule-calendar">
-            <mat-calendar #calendar [(selected)]="selectedDate">
-            </mat-calendar>
-          </div>
-          <div class="schedule-info">
-            InfoInfoInfoInfov InfoInfovvInfovvvvInfov vInfo v Info Info Info Info Info 
-          </div>
-        </div>
+
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1">

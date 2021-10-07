@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSliderModule } from '@angular/material/slider';
 
@@ -71,6 +72,7 @@ import { AuthInterceptor } from './auth.interceptor';
     MatGridListModule,
     MatIconModule,
     MatInputModule,
+    MatTabsModule,
     MatToolbarModule,
     MatSliderModule,
 
