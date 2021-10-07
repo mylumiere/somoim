@@ -102,7 +102,15 @@
   width: 40%;
 }
 
+.schedule-info-header {
+  text-align: end;
+}
+
 .content-router {
   display: flex;
   text-decoration: none !important;
+}
+
+:host ::ng-deep .mat-tab-label {
+  min-width: 25% !important;
 }
