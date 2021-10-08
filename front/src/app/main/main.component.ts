@@ -46,7 +46,6 @@ export class MainComponent implements OnInit {
   logOut(): void {
     this.userService.signOut();
     this.signedInUser = null;
-    this.router.navigate(['/sign_in'])
   }
 
   // For calendar

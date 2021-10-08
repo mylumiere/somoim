@@ -122,8 +122,18 @@
           </mat-tab-group>
         </div>
         <div *ngIf="!signedInUser" class="account">
-          <a mat-raised-button color="primary" routerLink="/sign_in">로그인</a>
-          <a mat-raised-button color="accent" routerLink="/sign_up">회원가입</a>
+          <div class="account-login">
+            <div class="account-login-header">소모임에 로그인하고 편리하게 내 모임을 관리하세요.</div>
+            <button mat-flat-button class="account-login-button" color="primary" routerLink="/sign_in">로그인</button>
+
+            <div class="account-login-footer">
+              <a class="small-content-subtitle content-router" routerLink="/sign_up">
+                <mat-icon class="small-content subtitle content-icon">person</mat-icon>
+                회원가입
+                <mat-icon class="small-content subtitle content-icon">keyboard_arrow_right</mat-icon>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </mat-grid-tile>
