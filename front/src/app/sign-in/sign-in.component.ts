@@ -40,7 +40,7 @@ export class SignInComponent implements OnInit {
     this.userService.signIn(this.signInForm.value)
     .subscribe(res => {
       if(res) {
-        this.router.navigate(['/articles'])
+        this.router.navigate([''])
       }
       else {
         this.user_id?.setErrors({invalid:true});
