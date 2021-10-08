@@ -7,6 +7,11 @@
   margin: 5px
 }
 
+.content {
+  width: 1140px;
+  margin: 0 auto;
+}
+
 .main-row {
   width:100%;
   padding: 5px;
@@ -18,4 +23,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.home-button {
+  background-color: #e57b5c;
+  color: white;
 }
