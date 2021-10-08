@@ -43,10 +43,6 @@
             <mat-tab class="account-tab" label="일정">
               <div class="schedule">
                 <div class="schedule-calendar">
-                  <div>{{today}}</div>
-                  <div>{{year}}</div>
-                  <div>{{month}}</div>
-                  <div>{{numWeeks}}</div>
                   <div class="calendar-header">
                     <button mat-icon-button (click)="toLastMonth()">
                       <mat-icon>keyboard_arrow_left</mat-icon>
@@ -74,7 +70,7 @@
                               (firstSunday + dayIdx + weekIdx*7) >= 1 ?
                               (firstSunday + dayIdx + weekIdx*7) : '' }}
                           </button>
-                          <button mat-stroked-button class="calendar-body-date" color="primary"
+                          <button mat-stroked-button class="calendar-body-date-border" color="primary"
                           *ngIf="isToday(dayIdx, weekIdx) && !isSelectedDate(dayIdx, weekIdx)"
                           (click)="selectDate(dayIdx, weekIdx)">
                             {{(firstSunday + dayIdx + weekIdx*7) <= numDates &&
@@ -95,10 +91,14 @@
                 </div>
                 <div class="schedule-info">
                   <div class="schedule-info-header">
-                    <a class="small-content-subtitle">1234개의 일정</a>
-                    <a class="small-content-subtitle content-router" routerLink="/articles">
-                      <mat-icon class="small-content subtitle content-icon">add_circle_outline</mat-icon>크게보기
+                    <a class="small-content-subtitle-big schedule-router" routerLink="/articles">
+                      <mat-icon class="small-content-subtitle-big schedule-icon">insert_invitation</mat-icon>
+                      내 일정
+                      <mat-icon class="small-content-subtitle-big schedule-icon">keyboard_arrow_right</mat-icon>
                     </a>
+                  </div>
+                  <div class="schedule-info-title">
+                    {{selectedDate.getFullYear()}}년 {{selectedDate.getMonth()+1}}월 {{selectedDate.getDate()}}일
                   </div>
                   InfoInfoInfoInfov InfoInfovvInfovvvvInfov vInfo v Info Info Info Info Info 
                 </div>
@@ -122,8 +122,18 @@
           </mat-tab-group>
         </div>
         <div *ngIf="!signedInUser" class="account">
-          <a mat-raised-button color="primary" routerLink="/sign_in">로그인</a>
-          <a mat-raised-button color="accent" routerLink="/sign_up">회원가입</a>
+          <div class="account-login">
+            <div class="account-login-header">소모임에 로그인하고 편리하게 내 모임을 관리하세요.</div>
+            <button mat-flat-button class="account-login-button" color="primary" routerLink="/sign_in">로그인</button>
+
+            <div class="account-login-footer">
+              <a class="small-content-subtitle content-router" routerLink="/sign_up">
+                <mat-icon class="small-content subtitle content-icon">person</mat-icon>
+                회원가입
+                <mat-icon class="small-content subtitle content-icon">keyboard_arrow_right</mat-icon>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </mat-grid-tile>
