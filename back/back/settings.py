@@ -47,7 +47,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users',
-    'board',
+    'somoim',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -188,21 +188,3 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ]
 }
-
-"""
-REST_USE_JWT = True
-
-JWT_AUTH = {
-    'JWT_SECRET_KEY': SECRET_KEY,
-    'JWT_ALGORITHM': 'HS256', # 암호화 알고리즘
-    'JWT_ALLOW_REFRESH': True, # refresh 사용 여부
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7), # 유효기간 설정
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28), # JWT 토큰 갱신 유효기간
-    # import datetime 상단에 import 하기
-}
-
-
-CORS_ORIGIN_WHITELIST = (
-    'localhost:4200',
-)
-"""
