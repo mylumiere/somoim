@@ -19,8 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -75,8 +77,10 @@ import { AuthInterceptor } from './auth.interceptor';
     MatInputModule,
     MatRippleModule,
     MatSliderModule,
+    MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    
 
     AppRoutingModule,
     BrowserAnimationsModule

@@ -3,3 +3,4 @@ secrets.json
 Lib/
 Scripts/
 pyvenv.cfg
+node_modules

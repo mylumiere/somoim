@@ -1,0 +1,15 @@
+@import '../app.component.css';
+
+.articles-title {
+  padding: 30px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.mat-column-id {
+  width: 40px;
+}
+
+.mat-column-hits {
+  width: 40px;
+}
