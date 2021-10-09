@@ -1,21 +1,54 @@
-<h2>Articles</h2>
-<ul class="articles">
-  <li *ngFor="let article of articles">
-    <a routerLink="/article/{{article.id}}">
-      <span class="badge">{{article.id}}</span> {{article.title}}{{article.content}}
-    </a>
-    <button class="delete" title="delete article" (click)="delete(article)">x</button>
-  </li>
-</ul>
-<div>
-  <label for="new-title">Article title: </label>
-  <input id="new-title" #articleTitle />
-  <label for="new-content">Article content: </label>
-  <input id="new-content" #articleContent />
-  
+<div class="content">
+  <mat-tab-group>
+    <mat-tab label="전체 게시판">
+      <div class="articles-title">
+        전체 게시판
+      </div>
+      <table mat-table style="width: 100%;" [dataSource]="articles">
 
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button class="add-button" (click)="add(articleTitle.value, articleContent.value); articleTitle.value=''; articleContent.value=''">
-    Add Article
-  </button>
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let article"> {{article.id}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> 제목 </th>
+          <td mat-cell *matCellDef="let article"> {{article.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="hits">
+          <th mat-header-cell *matHeaderCellDef> 조회수 </th>
+          <td mat-cell *matCellDef="let article"> {{article.hits}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <ul class="articles">
+        <li *ngFor="let article of articles">
+          <a routerLink="/article/{{article.id}}">
+            <span class="badge">{{article.id}}</span> {{article.title}}{{article.content}}
+          </a>
+          <button class="delete" title="delete article" (click)="delete(article)">x</button>
+        </li>
+      </ul>
+      <div>
+        <label for="new-title">Article title: </label>
+        <input id="new-title" #articleTitle />
+        <label for="new-content">Article content: </label>
+        <input id="new-content" #articleContent />
+        
+        <button class="add-button" (click)="add(articleTitle.value, articleContent.value); articleTitle.value=''; articleContent.value=''">
+          Add Article
+        </button>
+      </div>
+    </mat-tab>
+    <mat-tab label="구인 중"> Content 2 </mat-tab>
+    <mat-tab label="마감"> Content 3 </mat-tab>
+  </mat-tab-group>
 </div>

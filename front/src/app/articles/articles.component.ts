@@ -12,6 +12,7 @@ import { MessageService } from '../message.service';
 export class ArticlesComponent implements OnInit {
 
   articles: Article[] = [];
+  displayedColumns: string[] = ['id', 'title', 'hits'];
 
   constructor(
     private articleService: ArticleService,

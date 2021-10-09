@@ -16,11 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users.views import SignInAPI, UserListAPI, UserAPI, SignedInUserAPI
-from board.views import ArticleListView, ArticleView
+from somoim.views import ArticleListView, ArticleView
 
 urlpatterns = [
     path('users/', include('users.urls')),
-    path('api/board/', include('board.urls')),
     path('admin/', admin.site.urls),
     path('api/', SignedInUserAPI.as_view()),
     path('api/users/sign_in/', SignInAPI.as_view()),
