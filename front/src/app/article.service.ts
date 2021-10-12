@@ -35,7 +35,11 @@ export class ArticleService {
   getArticles(): Observable<Article[]> {
     return this.http.get<Article[]>(this.articlesUrl)
     .pipe(
-      tap(_ => this.log('fetched articles')),
+      tap(_ => {
+        console.log(_),
+        this.log('fetched articles')
+      }
+        ),
       catchError(this.handleError<Article[]>('getArticles',[]))
       );
   }
