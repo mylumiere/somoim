@@ -1,4 +1,11 @@
-/* ArticlesComponent's private CSS styles */
+.banner {
+  width: 100%;
+  height: 240px;
+  background-image: url('../assets/banner.png');
+  background-size: 1140px;
+  background-position: center;
+}
+
 .spacer {
   flex: 1 1 auto;
 }

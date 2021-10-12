@@ -12,7 +12,7 @@ import { MessageService } from '../message.service';
 export class ArticlesComponent implements OnInit {
 
   articles: Article[] = [];
-  displayedColumns: string[] = ['id', 'title', 'hits'];
+  displayedColumns: string[] = ['id', 'title', 'writer', 'registered_date', 'hits'];
 
   constructor(
     private articleService: ArticleService,
@@ -23,10 +23,14 @@ export class ArticlesComponent implements OnInit {
     this.getArticles()
   }
 
+  currentPage = 0;
+  pageNum = 2;
+
   getArticles(): void {
     this.articleService.getArticles()
         .subscribe(articles => this.articles = articles);
   }
+
 
   add(title: string, content: string): void {
     title = title.trim();
