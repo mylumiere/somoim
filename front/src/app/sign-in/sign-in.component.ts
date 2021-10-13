@@ -17,8 +17,6 @@ export class SignInComponent implements OnInit {
   ) { }
 
   signInForm: FormGroup;
-  //user_id: string;
-  //password: string;
   errorSignIn: string;
 
   ngOnInit(): void {

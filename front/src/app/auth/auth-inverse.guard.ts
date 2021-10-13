@@ -19,9 +19,8 @@ export class AuthInverseGuard implements CanActivate {
       this.token = this.userService.getToken()
       if (!this.token) { return true }
       else {
-        this.router.navigate(['/articles']);
+        this.router.navigate(['']);
         return false;
       }
   }
-  
 }

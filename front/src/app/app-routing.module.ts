@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'sign_up', component: SignUpComponent, canActivate: [AuthInverseGuard]},
   { path: 'about', component: InfoComponent},
   { path: 'articles', component: ArticlesComponent, canActivate: [AuthGuard]},
-  { path: 'article/:id', component: ArticleDetailComponent },
+  { path: 'articles/:id', component: ArticleDetailComponent, canActivate: [AuthGuard]},
   { path: '**', component: PageNotFoundComponent},
 ];
 

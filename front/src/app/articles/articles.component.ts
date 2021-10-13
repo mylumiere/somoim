@@ -15,6 +15,7 @@ import { UserService } from '../user.service';
 export class ArticlesComponent implements OnInit {
 
   articles: Article[] = [];
+  showingArticles: Article[] = [];
   displayedColumns: string[] = ['id', 'status', 'title', 'writer', 'registered_date', 'hits'];
 
   constructor(
