@@ -189,7 +189,7 @@
 
 :host ::ng-deep .mat-stroked-button {
   min-width: 0 !important;
-  line-height: 18px;
+  line-height: 16px;
 }
 
 :host ::ng-deep .mat-flat-button {

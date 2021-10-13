@@ -34,19 +34,14 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <ul class="articles">
-        <li *ngFor="let article of articles">
-          <a routerLink="/article/{{article.id}}">
-            <span class="badge">{{article.id}}</span> {{article.title}}{{article.content}}
-          </a>
-          <button class="delete" title="delete article" (click)="delete(article)">x</button>
-        </li>
-      </ul>
-      <button mat-flat-button color="primary" style="float: right;"><mat-icon class="button-icon">create</mat-icon> 글쓰기</button>
+      <div class="articles-buttons">
+        <button mat-flat-button color="primary" class="articles-button"><mat-icon class="button-icon">create</mat-icon> 글쓰기</button>
+      </div>
       <div class="articles-footer" style="display: flex">
         <span class="spacer"></span>
         <div class="articles-paginator">
           <button mat-icon-button color="basic" [disabled]="currentPage == 0"><mat-icon>keyboard_arrow_left</mat-icon></button>
+          <button mat-icon-button color="basic">1</button>
           <button mat-icon-button color="basic" [disabled]="currentPage == pageNum"><mat-icon>keyboard_arrow_right</mat-icon></button>
         </div>
         <span class="spacer"></span>

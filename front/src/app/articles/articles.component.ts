@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from '../models/article';
 import { ArticleService } from '../article.service';
 import { MessageService } from '../message.service';
+import { User } from '../models/user';
+import { UserService } from '../user.service';
+
 
 
 @Component({
@@ -12,10 +15,11 @@ import { MessageService } from '../message.service';
 export class ArticlesComponent implements OnInit {
 
   articles: Article[] = [];
-  displayedColumns: string[] = ['id', 'title', 'writer', 'registered_date', 'hits'];
+  displayedColumns: string[] = ['id', 'status', 'title', 'writer', 'registered_date', 'hits'];
 
   constructor(
     private articleService: ArticleService,
+    private userService: UserService,
     private messageService: MessageService,
     ) { }
 
@@ -28,9 +32,8 @@ export class ArticlesComponent implements OnInit {
 
   getArticles(): void {
     this.articleService.getArticles()
-        .subscribe(articles => this.articles = articles);
+    .subscribe(articles => this.articles = articles);
   }
-
 
   add(title: string, content: string): void {
     title = title.trim();

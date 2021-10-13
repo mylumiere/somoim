@@ -4,7 +4,7 @@ from django.db import models
 class Moim(models.Model):
     leader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='리더', related_name='leader_moim')
     name = models.CharField(max_length=128, verbose_name='제목')
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='멤버', related_name='member_moim')
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, null=True, verbose_name='멤버', related_name='member_moim')
     content = models.TextField(verbose_name='내용')
     province = models.CharField(max_length=16, verbose_name='시도')
     city = models.CharField(max_length=16, verbose_name='시군구')

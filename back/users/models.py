@@ -15,8 +15,8 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, user_id, password, email, name, nickname, date_of_birth, about):
-        user = self.create_user(user_id, password, email, name, nickname, date_of_birth, about)
+    def create_superuser(self, user_id, password, email, ):
+        user = self.create_user(user_id, password, email, 'admin', 'admin', '1900-01-01', '')
         user.is_superuser = True
         user.is_staff = True
         user.is_admin = True
@@ -27,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     objects = UserManager()
 
-    user_id = models.CharField(max_length=17, verbose_name="아이디", unique=True)
+    user_id = models.CharField(max_length=17, verbose_name="아이디", unique=True, primary_key=True)
     password = models.CharField(max_length=256, verbose_name="비밀번호")
     email = models.EmailField(max_length=128, verbose_name="이메일", null=True, unique=True)
     name = models.CharField(max_length=8, verbose_name="이름", null=True)
