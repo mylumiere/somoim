@@ -230,3 +230,39 @@
   justify-content: flex-end;
   text-decoration: none !important;
 }
+
+
+
+.mat-column-id {
+  padding: 5px;
+  width: 60px;
+  text-align: center;
+}
+
+.mat-column-status {
+  padding: 5px;
+  width: 60px;
+  text-align: center;
+}
+
+.mat-column-title {
+  padding: 5px;
+}
+
+.mat-column-writer {
+  padding: 5px;
+  width: 80px;
+  text-align: center;
+}
+
+.mat-column-registered_date {
+  padding: 5px;
+  width: 100px;
+  text-align: center;
+}
+
+.mat-column-hits {
+  padding: 5px;
+  width: 60px;
+  text-align: center;
+}
