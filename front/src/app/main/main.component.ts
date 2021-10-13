@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 export class MainComponent implements OnInit {
 
   articles: Article[] = []
+  numArticles: number;
   displayedColumns: string[] = ['id', 'status', 'title', 'writer', 'registered_date', 'hits'];
   signedInUser: User;
 
@@ -28,7 +29,10 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.articleService.getArticles().subscribe(
-      articles => this.articles = articles.slice(articles.length-5,articles.length).reverse()
+      articles => {
+        this.numArticles = articles.length
+        this.articles = articles.slice(articles.length-5,articles.length).reverse()
+      }
     )
     this.userService.getSignedInUser().subscribe(
       user => { 

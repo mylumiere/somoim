@@ -1,12 +1,29 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Article
+from .models import Moim, Article
 
-from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
-from .serializers import ArticleSerializer
+from .serializers import MoimSerializer, ArticleSerializer
+
+
+class MoimListView(APIView):
+    permissions_classes = (permissions.IsAuthenticated,)
+    def get(self, request):
+        queryset = Moim.objects.all()
+        print(queryset)
+        serializer = MoimSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class MoimView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, id):
+        article = Moim.objects.get(id=id)
+        serializer = MoimSerializer(article)
+        return Response(serializer.data)
+
 
 class ArticleListView(APIView):
     permissions_classes = (permissions.IsAuthenticated,)
