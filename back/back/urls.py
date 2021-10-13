@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users.views import SignInAPI, UserListAPI, UserAPI, SignedInUserAPI
-from somoim.views import ArticleListView, ArticleView
+from somoim.views import MoimListView, MoimView, ArticleListView, ArticleView
 
 urlpatterns = [
     path('users/', include('users.urls')),
@@ -25,6 +25,8 @@ urlpatterns = [
     path('api/users/sign_in/', SignInAPI.as_view()),
     path('api/users/', UserListAPI.as_view()),
     path('api/users/<str:user_id>/', UserAPI.as_view()),
+    path('api/moims/', MoimListView.as_view(), name='moim_list'),
+    path('api/moims/<int:id>', MoimView.as_view(), name='moim_detail'),
     path('api/articles/', ArticleListView.as_view(), name='article_list'),
     path('api/articles/<int:id>', ArticleView.as_view(), name='article_detail'),
 ]
