@@ -32,7 +32,6 @@ export class UserService {
   httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
   getUsers(): Observable<User[]> {
-    console.log(2)
     return this.http.get<User[]>(this.usersUrl, this.httpOptions)
     .pipe(
       tap(_ => this.log('fetched users')),

@@ -27,6 +27,12 @@
   text-align: center;
 }
 
+.mat-column-status {
+  padding: 5px;
+  width: 60px;
+  text-align: center;
+}
+
 .mat-column-title {
   padding: 5px;
 }
@@ -49,11 +55,21 @@
   text-align: center;
 }
 
-.articles-footer {
-  display: flex;
+.articles-buttons {
+  width: 100%;
+}
+
+.articles-button {
+  margin: 10px;
+  float: right;
 }
 
 .button-icon {
   line-height: 20px;
   font-size: 20px;
+}
+
+.articles-footer {
+  width: 100%;
+  display: flex;
 }
