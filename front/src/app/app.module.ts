@@ -40,6 +40,7 @@ import { UniqueDialogComponent } from './sign-up/unique-dialog/unique-dialog.com
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { AuthInterceptor } from './auth.interceptor';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { AuthInterceptor } from './auth.interceptor';
     DuplicatedDialogComponent,
     UniqueDialogComponent,
     PageNotFoundComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
