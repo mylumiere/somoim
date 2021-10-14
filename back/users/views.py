@@ -49,6 +49,7 @@ class UserListAPI(APIView):
         data = request.data
         user_id = data['user_id']
         password = data['password']
+        name = data['name']
         date_of_birth = data['date_of_birth']
         date_of_birth = datetime.strptime(date_of_birth,'%Y-%m-%dT%H:%M:%S.%fZ')
         utc = date_of_birth.replace(tzinfo=pytz.UTC)
@@ -56,8 +57,10 @@ class UserListAPI(APIView):
         user = User(
             user_id = user_id,
             email = data['email'],
-            name = data['name'],
+            name = name,
+            nickname = name,
             date_of_birth = date_of_birth,
+            photo = data['photo'],
         )
         user.set_password(password)
         user.save()
