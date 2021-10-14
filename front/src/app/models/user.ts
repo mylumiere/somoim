@@ -1,4 +1,5 @@
 import { Article } from './article';
+import { Moim } from './moim';
 
 export interface User {
   id: number;
@@ -9,5 +10,7 @@ export interface User {
   nickname: string;
   date_of_birth: string;
   about: string;
+  leader_moims: Moim[];
+  member_moims: Moim[];
   articles: Article[];
 }
