@@ -3,20 +3,30 @@
   <mat-grid-list cols="3" rowHeight="720px" [gutterSize]="'20px'">
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <div class="small-content">
-        <div class="profile-image"></div>
-        <div class="profile-user-id">{{user.name}}({{user.user_id}})</div>
-        <div class="profile-sub">{{user.email}}</div>
-        <div class="profile-sub">{{user.nickname ? user.nickname : '닉네임을 설정해주세요.'}}</div>
-        <div class="profile-sub">{{user.date_of_birth}}</div>
-        <div class="profile-about">{{user.about ? user.about : '나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.'}}</div>
-        <button mat-stroked-button color="basic" class="profile-edit-button">프로필 수정하기</button>
-        <div class="profile-withdrawal" style="text-align: right;">
-          <span>회원탈퇴 ></span>
+        <div class="profile-content">
+          <div class="profile-image"></div>
+          <div class="profile-user-id">{{user.name}}({{user.user_id}})</div>
+          <div class="profile-sub">{{user.email}}</div>
+          <div class="profile-sub">{{user.nickname ? user.nickname : '닉네임을 설정해주세요.'}}</div>
+          <div class="profile-sub">{{user.date_of_birth}}</div>
+          <div class="profile-about">{{user.about ? user.about : '나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.나는 자기소개입니다.'}}</div>
+          <button mat-stroked-button color="basic" class="profile-edit-button">프로필 수정하기</button>
+          <div class="profile-withdrawal" style="text-align: right;">
+            <span>회원탈퇴 ></span>
+          </div>
         </div>
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1">
-      profile2
+      <div class="small-content">
+        <mat-tab-group mat-stretch-tabs>
+          <mat-tab label="모임">1</mat-tab>
+          <mat-tab label="글 & 댓글">
+            {{signedInUser.articles}}
+          </mat-tab>
+          <mat-tab label="일정">3</mat-tab>
+        </mat-tab-group>
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
 

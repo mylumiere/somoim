@@ -5,6 +5,13 @@
   height: 100%;
 }
 
+.profile-content {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f6e6e5;
+  border: 1px #f4c5b7 solid;
+}
+
 .profile-image {
   width: calc(100% - 40px);
   height: 0;

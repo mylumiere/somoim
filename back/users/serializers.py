@@ -3,8 +3,9 @@ from .models import User
 from somoim.serializers import MoimSerializer, ArticleSerializer
 
 class UserSerializer(serializers.ModelSerializer) :
-    leader_moim = MoimSerializer(many=True)
-    member_moim = MoimSerializer(many=True)
+    leader_moims = MoimSerializer(many=True)
+    member_moims = MoimSerializer(many=True)
+    articles = ArticleSerializer(many=True)
 
     class Meta :
         model = User
