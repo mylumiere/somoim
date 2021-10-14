@@ -1,3 +1,5 @@
+import { Article } from './article';
+
 export interface User {
   id: number;
   user_id: string;
@@ -7,4 +9,5 @@ export interface User {
   nickname: string;
   date_of_birth: string;
   about: string;
+  articles: Article[];
 }

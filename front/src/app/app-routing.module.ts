@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { SignInComponent} from './sign-in/sign-in.component'
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ProfileComponent } from './profile/profile.component';
 import { InfoComponent } from './info/info.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
@@ -15,9 +16,11 @@ const routes: Routes = [
   { path: '', component: MainComponent},
   { path: 'sign_in', component: SignInComponent, canActivate: [AuthInverseGuard]},
   { path: 'sign_up', component: SignUpComponent, canActivate: [AuthInverseGuard]},
+  { path: 'profile/:user_id', component: ProfileComponent},
   { path: 'about', component: InfoComponent},
   { path: 'articles', component: ArticlesComponent, canActivate: [AuthGuard]},
   { path: 'articles/:id', component: ArticleDetailComponent, canActivate: [AuthGuard]},
+
   { path: '**', component: PageNotFoundComponent},
 ];
 
