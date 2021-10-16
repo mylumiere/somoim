@@ -1,0 +1,87 @@
+
+.moim-set {
+  width: calc(100% - 20px);
+  padding: 10px;
+}
+
+.moim-set-header {
+  width: 100%;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.moim-set-cards {
+  width: 100%;
+  height: calc(100% - 30px);
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #f6e6e5;
+  border: 1px #f4c5b7 solid;
+  display: flex;
+  overflow: scroll;
+}
+
+.moim-set-cards-null {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: grey;
+}
+
+.moim-set-card {
+  width: 25%;
+  min-width: 25%;
+  margin: 0 5px 0 5px;
+}
+
+.moim-set-card-title {
+  height: 40px;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.moim-set-card-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.moim-set-card-state {
+  float: left;
+  font-size: 12px;
+  color: grey;
+  line-height: 30px;
+}
+
+.moim-set-card-state-closed {
+  margin: 5px;
+  height: 20px;
+  line-height: 20px;
+  float: left;
+  font-size: 12px;
+  color: white;
+  background-color: red;
+  border-radius: 3px;
+  padding: 0 3px 0 3px;
+}
+
+.moim-set-card-state-opened {
+  margin: 5px;
+  height: 20px;
+  line-height: 20px;
+  float: left;
+  font-size: 12px;
+  color: white;
+  background-color: green;
+  border-radius: 3px;
+  padding: 0 3px 0 3px;
+}
+
+.moim-set-card-button {
+  float: right;
+  line-height: 30px;
+}

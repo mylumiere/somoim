@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
     this.getSignedInUser();
+    this.activeLink = this.route.snapshot.firstChild.routeConfig.path;
   }
 
   signedInUser: User;
@@ -58,11 +59,9 @@ export class ProfileComponent implements OnInit {
             }
             console.log(this.schedules)
           }
-
         )
       }
     )
-
   }
 
 
@@ -123,4 +122,8 @@ export class ProfileComponent implements OnInit {
       this.selectedDate.getMonth() + 1 == this.month && 
       this.selectedDate.getDate() == (this.firstSunday + dayIdx + weekIdx*7));
     }
+
+  activeLink: string;
+  links = ['moims', 'articles', 'schedules'];
+  linkName = {'moims': '모임', 'articles': '글', 'schedules': '일정'}
 }

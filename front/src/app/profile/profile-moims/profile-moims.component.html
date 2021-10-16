@@ -1,0 +1,51 @@
+<div class="moim-set" *ngIf="user">
+  <div class="moim-set-header">
+    내가 리더인 소모임
+  </div>
+  <div class="moim-set-cards">
+    <div class="moim-set-cards-null" *ngIf="!user.leader_moims.length">
+      <div style="text-align: center;">
+        <div>만든 소모임이 없습니다. 새로운 소모임을 만들어보세요!</div>
+        <button mat-flat-button color="primary" style="margin-top: 20px;">소모임 만들기</button>
+      </div>
+    </div>
+    <mat-card class="moim-set-card" *ngFor="let moim of user.leader_moims">
+      <div class="moim-set-card-header">
+        <div class="moim-set-card-title">
+          {{moim.name.length > 25 ? moim.name.substr(0,25)+'...' : moim.name}}
+        </div>
+      </div>
+      <img src="../../assets/logo.png" alt="Logo" class="moim-set-card-image">
+      <div class="moim-set-card-state">
+        <div class="moim-set-card-state-closed" *ngIf="moim.members.length==moim.max_members">마감</div>
+        <div class="moim-set-card-state-opened" *ngIf="moim.members.length!=moim.max_members">구인 중</div>
+        {{moim.members.length}} / {{moim.max_members}}
+      </div>
+      <button mat-flat-button color="primary" class="moim-set-card-button">보러가기</button>
+    </mat-card>
+  </div>
+</div>
+<div class="moim-set" *ngIf="user">
+  <div class="moim-set-header">
+    멤버인 소모임
+  </div>
+  <div class="moim-set-cards">
+    <div class="moim-set-cards-null" *ngIf="!user.member_moims.length">
+      <span>가입한 소모임이 없습니다. 소모임에 가입해보세요!</span>
+    </div>
+    <mat-card class="moim-set-card" *ngFor="let moim of user.member_moims">
+      <div class="moim-set-card-header">
+        <div class="moim-set-card-title">
+          {{moim.name.length > 25 ? moim.name.substr(0,25)+'...' : moim.name}}
+        </div>
+      </div>
+      <img src="../../assets/logo.png" alt="Logo" class="moim-set-card-image">
+      <div class="moim-set-card-state">
+        <div class="moim-set-card-state-closed" *ngIf="moim.members.length==moim.max_members">마감</div>
+        <div class="moim-set-card-state-opened" *ngIf="moim.members.length!=moim.max_members">구인 중</div>
+        {{moim.members.length}} / {{moim.max_members}}
+      </div>
+      <button mat-flat-button color="primary" class="moim-set-card-button">보러가기</button>
+    </mat-card>
+  </div>
+</div>

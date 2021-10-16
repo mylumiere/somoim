@@ -11,12 +11,20 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInverseGuard } from './auth/auth-inverse.guard';
+import { ProfileMoimsComponent } from './profile/profile-moims/profile-moims.component';
+import { ProfileArticlesComponent } from './profile/profile-articles/profile-articles.component';
+import { ProfileSchedulesComponent } from './profile/profile-schedules/profile-schedules.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
   { path: 'sign_in', component: SignInComponent, canActivate: [AuthInverseGuard]},
   { path: 'sign_up', component: SignUpComponent, canActivate: [AuthInverseGuard]},
-  { path: 'profile/:user_id', component: ProfileComponent},
+  { path: 'profile/:user_id', component: ProfileComponent, canActivate: [AuthGuard],
+    children: [
+      { path: 'moims', component: ProfileMoimsComponent },
+      { path: 'articles', component: ProfileArticlesComponent },
+      { path: 'schedules', component: ProfileSchedulesComponent }
+    ] },
   { path: 'about', component: InfoComponent},
   { path: 'articles', component: ArticlesComponent, canActivate: [AuthGuard]},
   { path: 'articles/:id', component: ArticleDetailComponent, canActivate: [AuthGuard]},
