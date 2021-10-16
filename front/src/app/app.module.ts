@@ -24,6 +24,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -85,6 +87,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatTabsModule,
     MatToolbarModule,
     
+    NgxMatFileInputModule,
 
     AppRoutingModule,
     BrowserAnimationsModule

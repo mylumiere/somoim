@@ -36,7 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_of_birth = models.DateField(verbose_name="생년월일", null=True)
     about = models.TextField(max_length=200, verbose_name="한마디", null=True)
     date_joined = models.DateTimeField(auto_now_add=True, null=True, verbose_name="가입일")
-    photo = models.ImageField(upload_to="users", null=True)
+    photo = models.TextField(verbose_name="사진", null=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

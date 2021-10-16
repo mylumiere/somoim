@@ -7,5 +7,6 @@ export interface Moim {
   members: User[];
   max_members: number;
   content: string;
+  schedules: Schedule[];
   registered_date: string;
 }

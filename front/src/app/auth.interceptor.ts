@@ -20,7 +20,6 @@ export class AuthInterceptor implements HttpInterceptor {
     if (this.token) {
       request = request.clone({ setHeaders: { Authorization: 'Token ' + this.token } });
     }
-    console.log(request)
     return next.handle(request);
   }
 }

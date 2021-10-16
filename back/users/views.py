@@ -12,6 +12,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
 from .serializers import UserSerializer
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 
 class SignedInUserAPI(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -51,6 +52,9 @@ class UserListAPI(APIView):
         password = data['password']
         name = data['name']
         date_of_birth = data['date_of_birth']
+        photo = data['photo']
+        print(data)
+        print(photo)
         date_of_birth = datetime.strptime(date_of_birth,'%Y-%m-%dT%H:%M:%S.%fZ')
         utc = date_of_birth.replace(tzinfo=pytz.UTC)
         date_of_birth = utc.astimezone(timezone.get_current_timezone()).date()
@@ -60,7 +64,7 @@ class UserListAPI(APIView):
             name = name,
             nickname = name,
             date_of_birth = date_of_birth,
-            photo = data['photo'],
+            photo = photo,
         )
         user.set_password(password)
         user.save()
