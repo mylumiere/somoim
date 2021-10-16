@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" *ngIf="user">
   <div style="width: 100%; height: 20px;"></div>
   <mat-grid-list cols="3" rowHeight="900px" [gutterSize]="'20px'">
     <mat-grid-tile [colspan]="1">
@@ -74,12 +74,75 @@
           <mat-tab label="글 & 댓글">
             {{user.articles}}
           </mat-tab>
-          <mat-tab label="일정">3</mat-tab>
+          <mat-tab label="일정">
+            <div class="schedule">
+              <div class="schedule-calendar">
+                <div class="calendar-header">
+                  <button mat-icon-button (click)="toLastMonth()">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                  </button>
+                  <span class="spacer"></span>
+                  <div class="calendar-header-yearmonth">
+                    {{year}}년 {{month}}월
+                  </div>
+                  <span class="spacer"></span>
+                  <button mat-icon-button (click)="toNextMonth()">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                  </button>
+                </div>
+                <div class="calendar-body">
+                  <table class="calendar-body-table">
+                    <tr class="calendar-body-header">
+                      <td class="calendar-body-header" *ngFor="let day of days">{{day}}</td>
+                    </tr>
+                    <tr *ngFor="let weekIdx of arrayWeeks">
+                      <td class="calendar-td" *ngFor="let dayIdx of arrayDays">
+                        <div class="calendar-body-date" *ngIf="isSelectedDate(dayIdx, weekIdx)">
+                          <button mat-flat-button class="calendar-body-date-button" color="primary" >
+                            {{(firstSunday + dayIdx + weekIdx*7) <= numDates &&
+                              (firstSunday + dayIdx + weekIdx*7) >= 1 ?
+                              (firstSunday + dayIdx + weekIdx*7) : '' }}  
+                          </button>
+                          <div class="calendar-body-date-dots">
+                            <span class="spacer"></span>
+                            <div class="calendar-body-date-dot"></div>
+                            <span class="spacer"></span>
+                          </div>
+                        </div>
+                        <div class="calendar-body-date" *ngIf="isToday(dayIdx, weekIdx) && !isSelectedDate(dayIdx, weekIdx)">
+                          <button mat-stroked-button class="calendar-body-date-button" (click)="selectDate(dayIdx, weekIdx)" color="primary" >
+                            {{(firstSunday + dayIdx + weekIdx*7) <= numDates &&
+                              (firstSunday + dayIdx + weekIdx*7) >= 1 ?
+                              (firstSunday + dayIdx + weekIdx*7) : '' }}  
+                          </button>
+                          <div class="calendar-body-date-dots">
+                            <span class="spacer"></span>
+                            <div class="calendar-body-date-dot"></div>
+                            <div class="calendar-body-date-dot"></div>
+                            <div class="calendar-body-date-dot"></div>
+                            <span class="spacer"></span>
+                          </div>
+                        </div>
+                        <div class="calendar-body-date" *ngIf="validDates(dayIdx, weekIdx) && !isToday(dayIdx, weekIdx) && !isSelectedDate(dayIdx, weekIdx)">
+                          <button mat-button class="calendar-body-date-button" (click)="selectDate(dayIdx, weekIdx)" color="primary" >
+                            {{(firstSunday + dayIdx + weekIdx*7) <= numDates &&
+                              (firstSunday + dayIdx + weekIdx*7) >= 1 ?
+                              (firstSunday + dayIdx + weekIdx*7) : '' }}  
+                          </button>
+                          <div class="calendar-body-date-dots">
+                            <!--div class="calendar-body-date-dot"></div-->
+                          </div>
+                        </div>
+                    </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            {{schedules}}
+          </mat-tab>
         </mat-tab-group>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
-
-  <div>{{user.user_id}}</div>
-  <div>{{signedInUser.user_id}}</div>
 </div>

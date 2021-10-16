@@ -43,7 +43,8 @@ signUpForm: FormGroup;
       password_confirm: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
       name: new FormControl('', [Validators.required]),
-      date_of_birth: new FormControl('', [Validators.required])
+      date_of_birth: new FormControl('', [Validators.required]),
+      photo: new FormControl(''),
     }, {
       validators: [PasswordConfirmValidator]
     })
@@ -173,6 +174,7 @@ signUpForm: FormGroup;
     return
   }
 
+  
   onSubmit() {
     this.userService.postUser(this.signUpForm.value)
     .subscribe(user => {
@@ -195,4 +197,29 @@ signUpForm: FormGroup;
     this.userService.getUsers()
     .subscribe(users => this.users = users);
   }
+
+  /*
+
+  onFileChange(event:any) {
+    if (event.target.files.length > 0) {
+      const photo = event.target.files[0];
+      this.signUpForm.patchValue({
+        photo: this.getBase64(photo)
+      });
+    }
+  }
+
+  getBase64(file: File) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+    return reader.result
+ }
+
+ */
 }

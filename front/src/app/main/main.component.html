@@ -19,7 +19,9 @@
       <div class="small-content">
         <div *ngIf="signedInUser" class="account">
           <div class="account-header">
-            <div class="account-img"></div>
+            <div class="account-img">
+              <img src="http://127.0.0.1:8000/{{signedInUser.photo}}">
+            </div>
             <div class="account-info">
               <div class="account-info-rows">
                 <div class="account-info-row">

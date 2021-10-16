@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Moim, Article
+from .models import Moim, Article, Schedule
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -20,8 +20,25 @@ class MoimView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, id):
-        article = Moim.objects.get(id=id)
-        serializer = MoimSerializer(article)
+        moim = Moim.objects.get(id=id)
+        serializer = MoimSerializer(moim)
+        return Response(serializer.data)
+
+
+class ScheduleListView(APIView):
+    permissions_classes = (permissions.IsAuthenticated,)
+    def get(self, request, id):
+        queryset = Schedule.objects.filter(moim=Moim.objects.get(id=id))
+        print(queryset)
+        serializer = MoimSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class ScheduleView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, id, s_id):
+        schedule = Schedule.objects.get(id=s_id)
+        serializer = MoimSerializer(schedule)
         return Response(serializer.data)
 
 
