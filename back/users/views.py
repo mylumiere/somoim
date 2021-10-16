@@ -19,7 +19,8 @@ class SignedInUserAPI(APIView):
     def get(self, request):
         user = request.user
         if user:
-            return Response({'user_id':user.user_id}, status=200)
+            serializer = UserSerializer(user)
+            return Response(serializer.data, status=200)
         else:
             return HttpResponse(status=404)
 

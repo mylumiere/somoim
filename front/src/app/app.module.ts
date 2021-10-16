@@ -43,6 +43,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { AuthInterceptor } from './auth.interceptor';
 import { ProfileComponent } from './profile/profile.component';
+import { ProfileSchedulesComponent } from './profile/profile-schedules/profile-schedules.component';
+import { ProfileMoimsComponent } from './profile/profile-moims/profile-moims.component';
+import { ProfileArticlesComponent } from './profile/profile-articles/profile-articles.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +61,9 @@ import { ProfileComponent } from './profile/profile.component';
     UniqueDialogComponent,
     PageNotFoundComponent,
     ProfileComponent,
+    ProfileSchedulesComponent,
+    ProfileMoimsComponent,
+    ProfileArticlesComponent,
   ],
   imports: [
     BrowserModule,

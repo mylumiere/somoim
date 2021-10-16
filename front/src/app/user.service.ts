@@ -87,12 +87,7 @@ export class UserService {
 
   getSignedInUser(): Observable<User> {
     return this.http.get<User>(`api/`,this.httpOptions).pipe(
-      tap(res => {
-        this.getUser(res.user_id).subscribe(
-          user => this.currentUser = user
-        )
-        this.log(`fetched`)
-      }),
+      tap(_ => this.log(`fetched`)),
       catchError(this.handleError<User>(`getUser`))
     );
   }
